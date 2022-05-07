@@ -1,9 +1,8 @@
-import { useSelector } from 'react-redux';
-import { IState } from '../../redux/store';
-import { LanguageEnum } from '../../redux/slices/localization/localizationTypes';
 import { locales } from './locales';
+import { useLocales } from '../../helpers/hooks/useLocales';
 
 export default function SignUp() {
-  const language = useSelector((state: IState) => state.localization.lang as LanguageEnum);
+  const [language] = useLocales();
+
   return <div>{locales[language].title}</div>;
 }

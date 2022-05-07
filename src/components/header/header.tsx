@@ -24,7 +24,7 @@ export default function Header() {
       <button
         type="button"
         onClick={() => {
-          if (language === 'English') {
+          if (language === LanguageEnum.ENG) {
             setLang(LanguageEnum.RUS);
           } else {
             setLang(LanguageEnum.ENG);
