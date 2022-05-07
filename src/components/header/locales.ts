@@ -1,16 +1,14 @@
-const headerLoc = {
-  russianHeader: {
+export const locales = {
+  Russian: {
     mainLink: 'Главная',
     profileLink: 'Профиль',
     logInLink: 'Войти',
     signUpLink: 'Зарегестрироваться',
   },
-  englishHeader: {
+  English: {
     mainLink: 'Main',
     profileLink: 'Profile',
     logInLink: 'Log In',
     signUpLink: 'Sign Up',
   },
 };
-
-export const { russianHeader, englishHeader } = headerLoc;

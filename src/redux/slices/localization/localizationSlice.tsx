@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ILanguage } from './localizationTypes';
+import { ILanguage, LanguageEnum } from './localizationTypes';
 
-const initialState = {
-  lang: 'English',
+const initialState: { lang: LanguageEnum } = {
+  lang: LanguageEnum.ENG,
 };
 
 const localizationSlice = createSlice({

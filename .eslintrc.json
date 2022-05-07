@@ -41,7 +41,8 @@
       "prefer-destructuring":"error",
       "object-curly-newline":"off",
       "linebreak-style": ["error", "windows"],
-      "no-param-reassign":"off"
+      "no-param-reassign":"off",
+      "import/prefer-default-export": "off"
     },
     "settings": {
       "react": {
