@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { localizationReducers } from './features/localization/localization-Slice';
+import { localizationReducers } from './slices/localization/localizationSlice';
 
 const store = configureStore({
   reducer: {
@@ -7,6 +7,6 @@ const store = configureStore({
   },
 });
 
-export default store;
-export type RootState = ReturnType<typeof store.getState>;
+export { store };
+export type IState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

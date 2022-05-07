@@ -1,10 +1,9 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from '../Header/Header';
-import Main from '../../feature/Main/Main';
-import Profile from '../../feature/Profile/Profile';
-import LogIn from '../../feature/Log-In/Log-In';
-import SignUp from '../../feature/Sign-Up/Sign-Up';
+import Header from '../header/header';
+import Main from '../../feature/main/main';
+import Profile from '../../feature/profile/profile';
+import LogIn from '../../feature/logIn/logIn';
+import SignUp from '../../feature/signUp/signUp';
 
 function App() {
   return (
