@@ -10,30 +10,29 @@ import {
 } from '@ant-design/icons';
 
 import 'antd/dist/antd.min.css';
+import './designComponents.scss';
 
 const onFinish = () => {};
 const onFinishFailed = () => {};
 
 function DesignComponents() {
   return (
-    <div style={{ marginTop: '2rem', marginLeft: '2rem' }}>
+    <div className="demo-container">
       <h1>General Components</h1>
-      <div style={{ marginTop: '2rem', paddingBottom: '2rem', borderBottom: '1px solid #1890ff' }}>
+      <div>
         <h2>Button</h2>
         <DatePicker />
-        <Button type="primary" style={{ marginLeft: 8 }}>
-          Primary Button
-        </Button>
+        <Button type="primary">Primary Button</Button>
       </div>
-      <div style={{ marginTop: '2rem', paddingBottom: '2rem', borderBottom: '1px solid #1890ff' }}>
+      <div className="demo-icons">
         <h2>Icons</h2>
-        <LoginOutlined style={{ fontSize: '2em', color: '#1890ff', padding: '0.5em' }} />
-        <PlusCircleOutlined style={{ fontSize: '2em', color: '#1890ff', padding: '0.5em' }} />
-        <CloseCircleOutlined style={{ fontSize: '2em', color: '#1890ff', padding: '0.5em' }} />
-        <DeleteOutlined style={{ fontSize: '2em', color: '#1890ff', padding: '0.5em' }} />
-        <FormOutlined style={{ fontSize: '2em', color: '#1890ff', padding: '0.5em' }} />
+        <LoginOutlined />
+        <PlusCircleOutlined />
+        <CloseCircleOutlined />
+        <DeleteOutlined />
+        <FormOutlined />
       </div>
-      <div style={{ marginTop: ' 2rem', paddingBottom: '2rem', borderBottom: '1px solid #1890ff' }}>
+      <div>
         <h2>Form</h2>
         <Form
           name="basic"
@@ -71,7 +70,7 @@ function DesignComponents() {
           </Form.Item>
         </Form>
       </div>
-      <div style={{ marginTop: '2rem', paddingBottom: '2rem' }}>
+      <div>
         <h2>Upload</h2>
         <Upload>
           <Button icon={<UploadOutlined />}>Upload</Button>
