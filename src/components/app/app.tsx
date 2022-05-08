@@ -4,6 +4,7 @@ import Main from '../../feature/main/main';
 import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
 import SignUp from '../../feature/signUp/signUp';
+import DesignComponents from '../designComponents/designComponents';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/demo" element={<DesignComponents />} />
       </Routes>
     </div>
   );
