@@ -59,7 +59,7 @@ function DesignComponents() {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 2, span: 16 }}>
+          <Form.Item name="remember" wrapperCol={{ offset: 2, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
