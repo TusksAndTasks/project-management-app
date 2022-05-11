@@ -1,8 +1,28 @@
 export const locales = {
   Russian: {
     title: 'Страница регистрации',
+    greeting: 'Регистрация успешна,',
+    nameRequired: 'Пожалуйста, укажите имя!',
+    nameMin: 'Имя должно быть длинее 3 символов!',
+    namePattern: 'Имя должно содержать только английские буквы!',
+    loginRequired: 'Пожалуйста, укажите логин!',
+    loginMin: 'Логин должен быть длинее 8 символов!',
+    loginPattern: 'Логин должен содержать только цифры и английские буквы!',
+    passwordRequired: 'Пожалуйста, укажите пароль!',
+    passwordMin: 'Пароль должен быть длинее 8 символов!',
+    passwordPattern: 'Пароль должен содержать только цифры и английские буквы!',
   },
   English: {
     title: 'Sign up page',
+    greeting: 'You successfully sign up,',
+    nameRequired: 'Please input your name!',
+    nameMin: 'Name must be longer than 3 characters!',
+    namePattern: 'Login must include only latin letters!',
+    loginRequired: 'Please input your login!',
+    loginMin: 'Login must be longer than 8 characters!',
+    loginPattern: 'Login must include only numbers and latin letters!',
+    passwordRequired: 'Please input your password!',
+    passwordMin: 'Password must be longer than 8 characters!',
+    passwordPattern: 'Password must include only numbers and latin letters!',
   },
 };
