@@ -5,6 +5,7 @@ import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
 import SignUp from '../../feature/signUp/signUp';
 import DesignComponents from '../designComponents/designComponents';
+import PageNotFound from '../pageNotFound/pageNotFound';
 import './app.scss';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/demo" element={<DesignComponents />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>
   );

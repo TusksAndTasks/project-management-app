@@ -1,0 +1,16 @@
+.error-page {
+  background: url("./../../assets/img/404.png");
+  background-repeat: no-repeat;
+  height: inherit;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-position-x: center;
+  background-position-y: inherit;
+  margin-top: 30px;
+
+  h1 {
+    color: var(--color-secondary-light);
+  }
+}
