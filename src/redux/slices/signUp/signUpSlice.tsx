@@ -23,9 +23,6 @@ const createUser = createAsyncThunk<ISignUpResponse, ISignUpData, Record<string,
     }
     const err = await response.json();
     throw new Error(err.message);
-    /* по идее если респонс не ок, должна автоматически выбрасываться ошибка и прерывать createUser.
-    Но почему-то вся эта история спокойнейшим образом умудряется завершиться .json'ом ошибки.
-    Так что rejected кейс не работает, если не ловить респонс не ok-статуса и не кидать ошибку */
   }
 );
 

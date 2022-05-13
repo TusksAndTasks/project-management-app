@@ -4,8 +4,7 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { ISignUpData } from '../../redux/slices/signUp/singUpTypes';
 import { locales } from './locales';
 
-export function AuthForm(props: IFormProps) {
-  const { nameList, ruleList, hook } = props;
+export function AuthForm({ nameList, ruleList, hook }: IFormProps) {
   const keys = Object.keys(nameList);
   const [language] = useLocales();
 

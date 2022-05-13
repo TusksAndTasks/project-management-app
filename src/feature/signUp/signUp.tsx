@@ -39,7 +39,7 @@ export default function SignUp() {
       },
       {
         type: 'string',
-        pattern: /^[a-z-]+$/i,
+        pattern: /^[a-z-\s]+$/i,
         message: locales[language].namePattern,
       },
     ],
@@ -55,7 +55,7 @@ export default function SignUp() {
       },
       {
         type: 'string',
-        pattern: /^[a-z0-9]+$/i,
+        pattern: /^[\w/S@]+$/i,
         message: locales[language].loginPattern,
       },
     ],
@@ -71,7 +71,7 @@ export default function SignUp() {
       },
       {
         type: 'string',
-        pattern: /^[a-z0-9]+$/i,
+        pattern: /^[a-z0-9!@"#^&*§$%&_()=?/+-]+$/i,
         message: locales[language].passwordPattern,
       },
     ],
