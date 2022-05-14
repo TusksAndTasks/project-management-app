@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { authReducers } from './slices/authentication/authSlice';
 import { localizationReducers } from './slices/localization/localizationSlice';
+import { logInReducer } from './slices/logIn/logInSlice';
 import { signUpReducer } from './slices/signUp/signUpSlice';
 
 const store = configureStore({
   reducer: {
     localization: localizationReducers,
     signUp: signUpReducer,
+    logIn: logInReducer,
+    auth: authReducers,
   },
 });
 

@@ -6,10 +6,13 @@ import { AuthForm } from '../../components/authForm/authForm';
 import { ISignRules } from './signUpFormTypes';
 import { useSignUpData } from '../../helpers/hooks/useSignUpData';
 import './signUp.scss';
+import { useAuthToken } from '../../helpers/hooks/useAuthToken';
+import Main from '../main/main';
 
 export default function SignUp() {
   const [language] = useLocales();
   const [signUpState, signUp] = useSignUpData();
+  const [authToken] = useAuthToken();
 
   useEffect(() => {
     if (signUpState.error && !signUpState.loading) {
@@ -77,7 +80,9 @@ export default function SignUp() {
     ],
   };
 
-  return (
+  return authToken ? (
+    <Main />
+  ) : (
     <div className="signUp">
       <div>{locales[language].title}</div>
       {signUpState.userData.id ? (

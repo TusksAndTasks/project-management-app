@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { LanguageEnum } from '../../redux/slices/localization/localizationTypes';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
+import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 
 export default function Header() {
   const [language, setLang] = useLocales();
+  const [, , deleteUserToken] = useAuthToken();
 
   return (
     <header>
@@ -21,6 +23,9 @@ export default function Header() {
       <NavLink to="/SignUp" className="header-link">
         {locales[language].signUpLink}
       </NavLink>
+      <button type="button" onClick={deleteUserToken}>
+        {locales[language].signOut}
+      </button>
       <button
         type="button"
         onClick={() => {
