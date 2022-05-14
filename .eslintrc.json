@@ -40,7 +40,7 @@
       "no-console":"warn",
       "prefer-destructuring":"error",
       "object-curly-newline":"off",
-      "linebreak-style": ["error", "windows"],
+      "linebreak-style": 0,
       "no-param-reassign":"off",
       "import/prefer-default-export": "off",
       "jsx-a11y/label-has-associated-control": "off",
