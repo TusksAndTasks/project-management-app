@@ -42,7 +42,9 @@
       "object-curly-newline":"off",
       "linebreak-style": ["error", "windows"],
       "no-param-reassign":"off",
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/control-has-associated-label": "off"
     },
     "settings": {
       "react": {

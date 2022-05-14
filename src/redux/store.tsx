@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { localizationReducers } from './slices/localization/localizationSlice';
+import { signUpReducer } from './slices/signUp/signUpSlice';
 
 const store = configureStore({
   reducer: {
     localization: localizationReducers,
+    signUp: signUpReducer,
   },
 });
 

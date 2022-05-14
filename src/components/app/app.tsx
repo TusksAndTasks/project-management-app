@@ -6,10 +6,11 @@ import LogIn from '../../feature/logIn/logIn';
 import SignUp from '../../feature/signUp/signUp';
 import DesignComponents from '../designComponents/designComponents';
 import PageNotFound from '../pageNotFound/pageNotFound';
+import './app.scss';
 
 function App() {
   return (
-    <div>
+    <div className="app-wrapper">
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
