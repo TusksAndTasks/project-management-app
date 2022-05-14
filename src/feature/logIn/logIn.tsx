@@ -5,14 +5,11 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { useLogInData } from '../../helpers/hooks/useLogInData';
 import { AuthForm } from '../../components/authForm/authForm';
 import { ISignRules } from '../signUp/signUpFormTypes';
-import { useAuthToken } from '../../helpers/hooks/useAuthToken';
-import Main from '../main/main';
 import './logIn.scss';
 
 export default function LogIn() {
   const [language] = useLocales();
   const [logInState, logIn] = useLogInData();
-  const [authToken] = useAuthToken();
 
   useEffect(() => {
     if (logInState.error && !logInState.loading) {
@@ -63,9 +60,7 @@ export default function LogIn() {
     ],
   };
 
-  return authToken ? (
-    <Main />
-  ) : (
+  return (
     <div className="logIn">
       <div>{locales[language].title}</div>
       <AuthForm nameList={nameList} ruleList={ruleList as ISignRules} hook={logIn} />

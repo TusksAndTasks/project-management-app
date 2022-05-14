@@ -13,7 +13,7 @@ import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 
 function App() {
   const [logInState] = useLogInData();
-  const [, getUserToken] = useAuthToken();
+  const [authToken, getUserToken] = useAuthToken();
 
   useEffect(() => {
     getUserToken();
@@ -25,8 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/LogIn" element={<LogIn />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/LogIn" element={authToken ? <Main /> : <LogIn />} />
+        <Route path="/SignUp" element={authToken ? <Main /> : <SignUp />} />
         <Route path="/demo" element={<DesignComponents />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
