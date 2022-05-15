@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
-import NavHeader from '../header/header';
+import NavHeader from '../navHeader/navHeader';
 import Main from '../../feature/main/main';
 import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
