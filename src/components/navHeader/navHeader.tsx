@@ -1,17 +1,22 @@
 import './navHeader.scss';
 import { Link } from 'react-router-dom';
-import { Menu, Layout } from 'antd';
+import { Menu } from 'antd';
+import Search from 'antd/lib/input/Search';
+import { useEffect, useState } from 'react';
 import { LanguageEnum } from '../../redux/slices/localization/localizationTypes';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 
 export default function NavHeader() {
-  const { Header } = Layout;
   const [language, setLang] = useLocales();
+  const [isLogged, setIsLogged] = useState<boolean>(true);
+
+  useEffect(() => {}, [isLogged]);
 
   return (
-    <Header>
-      <Menu defaultSelectedKeys={['/People']} mode="horizontal">
+    <>
+      <div className="logo" />
+      <Menu defaultSelectedKeys={['/']} mode="horizontal" className="nav-left">
         <Menu.Item key="/">
           {locales[language].mainLink}
           <Link to="/" />
@@ -28,18 +33,9 @@ export default function NavHeader() {
           {locales[language].people}
           <Link to="/People" />
         </Menu.Item>
-        <Menu.Item key="/Profile">
-          {locales[language].profileLink}
-          <Link to="/Profile" />
-        </Menu.Item>
-        <Menu.Item key="/LogIn">
-          {locales[language].logInLink}
-          <Link to="/LogIn" />
-        </Menu.Item>
-        <Menu.Item key="/SignUp">
-          {locales[language].signUpLink}
-          <Link to="/SignUp" />
-        </Menu.Item>
+      </Menu>
+      <Search />
+      <Menu mode="horizontal" className="nav-right">
         <Menu.Item
           onClick={() => {
             if (language === LanguageEnum.ENG) {
@@ -51,7 +47,29 @@ export default function NavHeader() {
         >
           Change language
         </Menu.Item>
+        {isLogged ? (
+          <Menu.Item
+            key="/"
+            onClick={() => {
+              setIsLogged(false);
+            }}
+          >
+            LogOut
+            <Link to="/" />
+          </Menu.Item>
+        ) : (
+          <Menu.Item key="/LogIn">
+            {locales[language].logInLink}
+            <Link to="/LogIn" />
+          </Menu.Item>
+        )}
+        {!isLogged && (
+          <Menu.Item key="/SignUp">
+            {locales[language].signUpLink}
+            <Link to="/SignUp" />
+          </Menu.Item>
+        )}
       </Menu>
-    </Header>
+    </>
   );
 }

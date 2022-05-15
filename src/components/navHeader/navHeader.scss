@@ -1,12 +1,38 @@
-header{
+header {
+    position: fixed;
     width: 100%;
     display: flex;
     flex-flow: row;
-    justify-content: space-around;
+    z-index: 1;
 
     >a{
         color: black;
         text-decoration: none;
         font-size: 20px;
     }
+
+    .logo {
+        float: left;
+        width: 120px;
+        height: 31px;
+        margin: 16px 24px 16px 0;
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-left {
+        width: 50%;
+    }
+
+    .nav-right {
+        width: 40%;
+        justify-content: end;
+    }
+}
+
+.ant-layout-header {
+    background: #fff;
+}
+
+.ant-input-group-wrapper {
+    width: 30%;
 }
