@@ -9,7 +9,7 @@ const initialState: ISignUpState = {
 
 const createUser = createAsyncThunk<ISignUpResponse, ISignUpData, Record<string, never>>(
   'signUp/createUser',
-  async (data: ISignUpData) => {
+  async (data) => {
     const response = await fetch(
       'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/signup',
       {

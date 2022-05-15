@@ -9,3 +9,14 @@ export interface IBoardState {
   error: string;
   loading: boolean;
 }
+
+export interface ICreateState {
+  title: string;
+  description: string;
+  token: string;
+}
+
+export interface IDeleteState {
+  id: string;
+  token: string;
+}

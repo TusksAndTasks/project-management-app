@@ -8,7 +8,7 @@ const initialState: ILogInState = {
 
 const logUser = createAsyncThunk<ILogInResponse, ILogInData, Record<string, never>>(
   'logIn/logUser',
-  async (data: ILogInData) => {
+  async (data) => {
     const response = await fetch(
       'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/signin',
       {
