@@ -5,10 +5,41 @@ header {
     flex-flow: row;
     z-index: 1;
 
-    >a{
-        color: black;
+    .ant-menu-title-content {
+        color: var(--color-primary);
         text-decoration: none;
-        font-size: 20px;
+        font-size: 1.4em;
+        font-weight: 700;
+    }
+
+    .ant-menu-item a:hover {
+        color: var(--color-primary);
+    }
+
+    .ant-menu-item-icon {
+        color: var(--color-primary);
+        &:hover,
+        &:focus {
+            color: var(--color-primary);
+
+            &:after {
+                border-color: var(--color-primary);
+            }
+        }
+    }
+
+    .ant-menu .ant-menu-overflow-item {
+        &.ant-menu-item {
+            &.ant-menu-item-selected:after,
+            &:hover:after, &:focus:after {
+                border-bottom: 2px solid var(--color-primary);
+            }
+        }
+        &.ant-menu-submenu {
+            &:hover:after, &:focus:after {
+                border-bottom: 2px solid var(--color-primary);
+            }
+        }
     }
 
     .logo {
@@ -27,6 +58,10 @@ header {
         width: 40%;
         justify-content: end;
     }
+
+    .ant-menu-horizontal.ant-menu-light {
+        border: none;
+    }
 }
 
 .ant-layout-header {
@@ -34,5 +69,14 @@ header {
 }
 
 .ant-input-group-wrapper {
-    width: 30%;
+    &.ant-input-search {
+        width: 30%;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.ant-menu-item .anticon {
+    padding-right: 5px;
+    vertical-align: initial;
 }
