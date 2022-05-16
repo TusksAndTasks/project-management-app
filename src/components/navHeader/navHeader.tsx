@@ -2,7 +2,6 @@ import './navHeader.scss';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import Search from 'antd/lib/input/Search';
-import { useState } from 'react';
 import {
   FileDoneOutlined,
   HomeOutlined,
@@ -17,10 +16,11 @@ import {
 import { LanguageEnum } from '../../redux/slices/localization/localizationTypes';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
+import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 
 export default function NavHeader() {
   const [language, setLang] = useLocales();
-  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [authToken, , deleteUserToken] = useAuthToken();
 
   return (
     <>
@@ -57,32 +57,21 @@ export default function NavHeader() {
         >
           {language === LanguageEnum.ENG ? 'EN' : 'RU'}
         </Menu.Item>
-        {isLogged && (
+        {authToken && (
           <Menu.Item key="profile" icon={<SettingOutlined />}>
             {locales[language].profileLink}
             <Link to="/Profile" />
           </Menu.Item>
         )}
-        {isLogged ? (
-          <Menu.Item
-            key="home"
-            icon={<LogoutOutlined />}
-            onClick={() => {
-              setIsLogged(false);
-            }}
-          >
+        {authToken ? (
+          <Menu.Item key="home" icon={<LogoutOutlined />} onClick={deleteUserToken}>
             <Link to="/" />
           </Menu.Item>
         ) : (
           <Menu.SubMenu icon={<LoginOutlined />} key="SubMenu">
-            <Menu.Item
-              key="logIn"
-              icon={<UserOutlined />}
-              onClick={() => {
-                setIsLogged(true);
-              }}
-            >
+            <Menu.Item key="logIn" icon={<UserOutlined />}>
               {locales[language].logInLink}
+              <Link to="/LogIn" />
             </Menu.Item>
             <Menu.Item key="signUp" icon={<UsergroupAddOutlined />}>
               {locales[language].signUpLink}

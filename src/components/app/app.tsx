@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import Header from '../header/header';
 import { Layout } from 'antd';
 import NavHeader from '../navHeader/navHeader';
 import Main from '../../feature/main/main';
