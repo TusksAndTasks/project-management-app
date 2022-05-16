@@ -1,6 +1,6 @@
 import './navHeader.scss';
 import { Link } from 'react-router-dom';
-import { Menu } from 'antd';
+import { Menu, Tooltip } from 'antd';
 import Search from 'antd/lib/input/Search';
 import {
   FileDoneOutlined,
@@ -64,9 +64,15 @@ export default function NavHeader() {
           </Menu.Item>
         )}
         {authToken ? (
-          <Menu.Item key="home" icon={<LogoutOutlined />} onClick={deleteUserToken}>
-            <Link to="/" />
-          </Menu.Item>
+          <Tooltip
+            placement="bottomLeft"
+            title={locales[language].signOut}
+            color="var(--color-primary)"
+          >
+            <Menu.Item key="home" icon={<LogoutOutlined />} onClick={deleteUserToken}>
+              <Link to="/" />
+            </Menu.Item>
+          </Tooltip>
         ) : (
           <Menu.SubMenu icon={<LoginOutlined />} key="SubMenu">
             <Menu.Item key="logIn" icon={<UserOutlined />}>
