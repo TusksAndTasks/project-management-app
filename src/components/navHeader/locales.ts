@@ -7,6 +7,7 @@ export const locales = {
     profileLink: 'Профиль',
     logInLink: 'Войти',
     signUpLink: 'Зарегестрироваться',
+    signOut: 'Выйти',
   },
   English: {
     mainLink: 'Main',
@@ -16,5 +17,6 @@ export const locales = {
     profileLink: 'Profile',
     logInLink: 'Log In',
     signUpLink: 'Sign Up',
+    signOut: 'Sign Out',
   },
 };

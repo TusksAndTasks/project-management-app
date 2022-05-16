@@ -30,7 +30,7 @@ export function AuthForm({ nameList, ruleList, hook }: IFormProps) {
       labelCol={{ span: 40 }}
     >
       {inputs}
-      <Form.Item wrapperCol={{ offset: 10 }}>
+      <Form.Item wrapperCol={{ offset: 11 }}>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
