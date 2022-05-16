@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from '../header/header';
 import Main from '../../feature/main/main';
 import Profile from '../../feature/profile/profile';
@@ -7,16 +8,26 @@ import SignUp from '../../feature/signUp/signUp';
 import DesignComponents from '../designComponents/designComponents';
 import PageNotFound from '../pageNotFound/pageNotFound';
 import './app.scss';
+import { useLogInData } from '../../helpers/hooks/useLogInData';
+import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 
 function App() {
+  const [logInState] = useLogInData();
+  const [, getUserToken] = useAuthToken();
+  const [authToken] = useAuthToken();
+
+  useEffect(() => {
+    getUserToken();
+  }, [getUserToken, logInState.loading]);
+
   return (
     <div className="app-wrapper">
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/Profile" element={<Profile />} />
-        <Route path="/LogIn" element={<LogIn />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/LogIn" element={authToken ? <Main /> : <LogIn />} />
+        <Route path="/SignUp" element={authToken ? <Main /> : <SignUp />} />
         <Route path="/demo" element={<DesignComponents />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
