@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authReducers } from './slices/authentication/authSlice';
+import { boardReducers } from './slices/board/boardSlice';
 import { boardsReducers } from './slices/boards/boardsSlice';
 import { localizationReducers } from './slices/localization/localizationSlice';
 import { logInReducer } from './slices/logIn/logInSlice';
@@ -12,6 +13,7 @@ const store = configureStore({
     logIn: logInReducer,
     auth: authReducers,
     boards: boardsReducers,
+    board: boardReducers,
   },
 });
 
