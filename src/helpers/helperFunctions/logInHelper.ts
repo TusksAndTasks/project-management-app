@@ -1,7 +1,7 @@
 import { locales } from '../../feature/logIn/locales';
 import { ISignRules } from '../../feature/signUp/signUpFormTypes';
 import { LanguageEnum } from '../../redux/slices/localization/localizationTypes';
-import { ILogInCache } from './helperTypes';
+import { ILogInCache } from './types';
 
 export function logInHelp() {
   const cache = {} as ILogInCache;

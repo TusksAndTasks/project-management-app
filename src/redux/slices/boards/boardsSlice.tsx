@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getHeaders } from '../../../helpers/helperFunctions/boardHelper';
+import { URLs } from '../../../helpers/requestURLs';
 import { IBoard, IBoardState, ICreateState, IDeleteState } from './boardsTypes';
 
 const initialState: IBoardState = {
@@ -10,17 +12,10 @@ const initialState: IBoardState = {
 const getBoards = createAsyncThunk<IBoard[], string, Record<never, string>>(
   'boards/getBoards',
   async (token) => {
-    const response = await fetch(
-      'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/boards',
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await fetch(URLs.boards(), {
+      method: 'GET',
+      headers: getHeaders(token),
+    });
     if (response.ok) {
       return response.json();
     }
@@ -33,18 +28,11 @@ const createBoard = createAsyncThunk<IBoard, ICreateState, Record<never, string>
   'boards/createBoard',
   async (data) => {
     const { title, description, token } = data;
-    const response = await fetch(
-      'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/boards',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title, description }),
-      }
-    );
+    const response = await fetch(URLs.boards(), {
+      method: 'POST',
+      headers: getHeaders(token),
+      body: JSON.stringify({ title, description }),
+    });
     if (response.ok) {
       return response.json();
     }
@@ -57,18 +45,11 @@ const deleteBoard = createAsyncThunk<string, IDeleteState, Record<never, string>
   'boards/deleteBoard',
   async (data) => {
     const { id, token } = data;
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/boards/${id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      }
-    );
+    const response = await fetch(URLs.boards(id), {
+      method: 'DELETE',
+      headers: getHeaders(token),
+      body: JSON.stringify({ id }),
+    });
     if (response.ok) {
       return id;
     }
