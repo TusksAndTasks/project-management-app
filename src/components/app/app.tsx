@@ -16,6 +16,7 @@ function App() {
   const [logInState] = useLogInData();
   const [authToken, getUserToken] = useAuthToken();
 
+
   useEffect(() => {
     getUserToken();
   }, [getUserToken, logInState.loading]);
