@@ -1,15 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getCookie } from '../../../helpers/helperFunctions/authHelper';
 
 const initialState: { token: string } = {
   token: '',
 };
-
-function getCookie(name: string) {
-  const matches = document.cookie.match(
-    new RegExp(`(?:^|; )${name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1')}=([^;]*)`)
-  );
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-} // https://learn.javascript.ru/cookie
 
 const authSlice = createSlice({
   name: 'auth',

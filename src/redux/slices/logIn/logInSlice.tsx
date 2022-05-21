@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { URLs } from '../../../helpers/requestURLs';
 import { ILogInData, ILogInResponse, ILogInState } from './logInTypes';
 
 const initialState: ILogInState = {
@@ -8,18 +9,15 @@ const initialState: ILogInState = {
 
 const logUser = createAsyncThunk<ILogInResponse, ILogInData, Record<string, never>>(
   'logIn/logUser',
-  async (data: ILogInData) => {
-    const response = await fetch(
-      'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/signin',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }
-    );
+  async (data) => {
+    const response = await fetch(URLs.logIn, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
     if (response.ok) {
       return response.json();
     }

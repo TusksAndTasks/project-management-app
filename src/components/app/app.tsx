@@ -10,11 +10,12 @@ import PageNotFound from '../pageNotFound/pageNotFound';
 import './app.scss';
 import { useLogInData } from '../../helpers/hooks/useLogInData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
+import Welcome from '../../feature/welcome/welcome';
 
 function App() {
   const [logInState] = useLogInData();
-  const [, getUserToken] = useAuthToken();
-  const [authToken] = useAuthToken();
+  const [authToken, getUserToken] = useAuthToken();
+
 
   useEffect(() => {
     getUserToken();
@@ -24,7 +25,7 @@ function App() {
     <div className="app-wrapper">
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={authToken ? <Main /> : <Welcome />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/LogIn" element={authToken ? <Main /> : <LogIn />} />
         <Route path="/SignUp" element={authToken ? <Main /> : <SignUp />} />
