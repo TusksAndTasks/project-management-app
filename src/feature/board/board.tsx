@@ -1,17 +1,21 @@
+import { Columns } from '../../components/columns/columns';
 import { useBoardData } from '../../helpers/hooks/useBoardData';
-// import { useLocales } from '../../helpers/hooks/useLocales';
+import { useColumnList } from '../../helpers/hooks/useColumnList';
+import { useLocales } from '../../helpers/hooks/useLocales';
+import { locales } from './locales';
 
 export default function Board() {
-  //   const [language] = useLocales();
+  const [language] = useLocales();
   const [boardsData] = useBoardData();
+  const [columnsData] = useColumnList();
 
-  return boardsData.loading ? (
-    <div>Loading</div>
+  return columnsData.loading ? (
+    <div>{locales[language].loading}</div>
   ) : (
     <div>
-      <div>{boardsData.currentBoard.title}</div>
-      <div>{boardsData.currentBoard.description}</div>
-      {/* Columns and tasks */}
+      <div>{`${locales[language].title}:${boardsData.currentBoard.title}`}</div>
+      <div>{`${locales[language].description}:${boardsData.currentBoard.description}`}</div>
+      <Columns boardId={boardsData.currentBoard.id} />
     </div>
   );
 }

@@ -7,9 +7,11 @@ import { BoardCreatorForm } from '../../components/boardCreatorForm.tsx/boardCre
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { useBoardData } from '../../helpers/hooks/useBoardData';
+import { useColumnList } from '../../helpers/hooks/useColumnList';
 
 export default function Main() {
   const [boardsData, getBoardsList, createBoard, deleteBoard] = useBoardsList();
+  const [, getColumnsList] = useColumnList();
   const [, showBoard] = useBoardData();
   const [authToken] = useAuthToken();
   const [language] = useLocales();
@@ -40,6 +42,7 @@ export default function Main() {
         id={board.id}
         onClick={(e) => {
           showBoard({ id: (e.target as HTMLElement).id, token: authToken });
+          getColumnsList({ boardId: (e.target as HTMLElement).id, token: authToken });
         }}
       >
         {locales[language].showBoard}
