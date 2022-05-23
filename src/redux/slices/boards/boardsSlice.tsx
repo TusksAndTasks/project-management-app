@@ -93,6 +93,7 @@ const boardsSlice = createSlice({
     builder.addCase(deleteBoard.fulfilled, (state, action) => {
       state.loading = false;
       state.boards = state.boards.filter((board) => board.id !== action.payload);
+      state.error = '';
     });
     builder.addCase(deleteBoard.rejected, (state, action) => {
       state.loading = false;

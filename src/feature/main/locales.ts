@@ -6,6 +6,7 @@ export const locales = {
     createButton: 'Создать доску',
     deleteButton: 'Удалить доску',
     creatorTitle: 'Форма создания доски',
+    showBoard: 'Открыть доску',
   },
   English: {
     title: 'Main page',
@@ -14,5 +15,6 @@ export const locales = {
     createButton: 'Create board',
     deleteButton: 'Delete board',
     creatorTitle: 'Board creation board',
+    showBoard: 'Open board',
   },
 };

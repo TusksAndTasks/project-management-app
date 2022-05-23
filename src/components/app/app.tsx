@@ -12,13 +12,13 @@ import './app.scss';
 import { useLogInData } from '../../helpers/hooks/useLogInData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import Welcome from '../../feature/welcome/welcome';
+import Board from '../../feature/board/board';
 
 const { Header, Content, Footer } = Layout;
 
 function App() {
   const [logInState] = useLogInData();
   const [authToken, getUserToken] = useAuthToken();
-
 
   useEffect(() => {
     getUserToken();

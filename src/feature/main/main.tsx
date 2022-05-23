@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Modal } from 'antd';
+import { NavLink } from 'react-router-dom';
 import { useBoardsList } from '../../helpers/hooks/useBoardsList';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { BoardCreatorForm } from '../../components/boardCreatorForm.tsx/boardCreatorForm';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
+import { useBoardData } from '../../helpers/hooks/useBoardData';
 
 export default function Main() {
   const [boardsData, getBoardsList, createBoard, deleteBoard] = useBoardsList();
+  const [, showBoard] = useBoardData();
   const [authToken] = useAuthToken();
   const [language] = useLocales();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,6 +34,16 @@ export default function Main() {
         {locales[language].boardDescription}
         {board.description}
       </div>
+      <NavLink
+        to="/Board"
+        type="button"
+        id={board.id}
+        onClick={(e) => {
+          showBoard({ id: (e.target as HTMLElement).id, token: authToken });
+        }}
+      >
+        {locales[language].showBoard}
+      </NavLink>
       <button
         type="button"
         id={board.id}
