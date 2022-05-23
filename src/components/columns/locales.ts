@@ -14,7 +14,7 @@ export const locales = {
     deleteButton: 'Delete column',
     createButton: 'Create column',
     modal: 'Give column a title',
-    modalTitle: 'Modal :',
+    modalTitle: 'Title :',
     titleRequired: 'Write column title',
   },
 };

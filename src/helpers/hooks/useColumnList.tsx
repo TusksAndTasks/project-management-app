@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { createColumn, deleteColumn, getColumns } from '../../redux/slices/columns/columnsSlices';
+import {
+  createColumnThunk,
+  deleteColumnThunk,
+  getColumnsThunk,
+} from '../../redux/slices/columns/columnsSlices';
 import {
   ICreateColumnData,
   IDeleteColumnData,
@@ -14,16 +18,16 @@ export function useColumnList(): IUseColumnsReturn {
   const columnsData = useSelector((state: IState) => state.columns);
 
   const getColumnsList = (data: IGetColumnData) => {
-    dispatch(getColumns(data));
+    dispatch(getColumnsThunk(data));
   };
 
-  const createNewColumn = (data: ICreateColumnData) => {
-    dispatch(createColumn(data));
+  const createColumn = (data: ICreateColumnData) => {
+    dispatch(createColumnThunk(data));
   };
 
-  const deleteOldColumn = (data: IDeleteColumnData) => {
-    dispatch(deleteColumn(data));
+  const deleteColumn = (data: IDeleteColumnData) => {
+    dispatch(deleteColumnThunk(data));
   };
 
-  return [columnsData, getColumnsList, createNewColumn, deleteOldColumn];
+  return [columnsData, getColumnsList, createColumn, deleteColumn];
 }

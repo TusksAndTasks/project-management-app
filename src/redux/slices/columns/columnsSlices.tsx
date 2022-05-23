@@ -10,7 +10,7 @@ const initialState: IColumnState = {
   error: '',
 };
 
-const getColumns = createAsyncThunk<IColumn[], IGetColumnData, Record<never, string>>(
+const getColumnsThunk = createAsyncThunk<IColumn[], IGetColumnData, Record<never, string>>(
   'columns/getColumns',
   async (data) => {
     const { boardId, token } = data;
@@ -26,7 +26,7 @@ const getColumns = createAsyncThunk<IColumn[], IGetColumnData, Record<never, str
   }
 );
 
-const createColumn = createAsyncThunk<IColumn, ICreateColumnData, Record<never, string>>(
+const createColumnThunk = createAsyncThunk<IColumn, ICreateColumnData, Record<never, string>>(
   'columns/createColumn',
   async (data) => {
     const { title, order, token, boardId } = data;
@@ -43,7 +43,7 @@ const createColumn = createAsyncThunk<IColumn, ICreateColumnData, Record<never, 
   }
 );
 
-const deleteColumn = createAsyncThunk<string, IDeleteColumnData, Record<never, string>>(
+const deleteColumnThunk = createAsyncThunk<string, IDeleteColumnData, Record<never, string>>(
   'columns/deleteColumn',
   async (data) => {
     const { boardId, columnId, token } = data;
@@ -67,39 +67,39 @@ const columnsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getColumns.pending, (state) => {
+    builder.addCase(getColumnsThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getColumns.fulfilled, (state, action) => {
+    builder.addCase(getColumnsThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.columns = action.payload;
       state.error = '';
     });
-    builder.addCase(getColumns.rejected, (state, action) => {
+    builder.addCase(getColumnsThunk.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message as string;
     });
-    builder.addCase(createColumn.pending, (state) => {
+    builder.addCase(createColumnThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(createColumn.fulfilled, (state, action) => {
+    builder.addCase(createColumnThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.columns = [...state.columns, action.payload];
       state.error = '';
     });
-    builder.addCase(createColumn.rejected, (state, action) => {
+    builder.addCase(createColumnThunk.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message as string;
     });
-    builder.addCase(deleteColumn.pending, (state) => {
+    builder.addCase(deleteColumnThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(deleteColumn.fulfilled, (state, action) => {
+    builder.addCase(deleteColumnThunk.fulfilled, (state, action) => {
       state.loading = false;
       state.columns = state.columns.filter((column) => column.id !== action.payload);
       state.error = '';
     });
-    builder.addCase(deleteColumn.rejected, (state, action) => {
+    builder.addCase(deleteColumnThunk.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message as string;
     });
@@ -107,4 +107,4 @@ const columnsSlice = createSlice({
 });
 
 export const columnReducers = columnsSlice.reducer;
-export { getColumns, createColumn, deleteColumn };
+export { getColumnsThunk, createColumnThunk, deleteColumnThunk };
