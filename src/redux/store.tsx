@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducers } from './slices/authentication/authSlice';
 import { boardReducers } from './slices/board/boardSlice';
 import { boardsReducers } from './slices/boards/boardsSlice';
+import { columnReducers } from './slices/columns/columnsSlices';
 import { localizationReducers } from './slices/localization/localizationSlice';
 import { logInReducer } from './slices/logIn/logInSlice';
 import { signUpReducer } from './slices/signUp/signUpSlice';
@@ -14,6 +15,7 @@ const store = configureStore({
     auth: authReducers,
     boards: boardsReducers,
     board: boardReducers,
+    columns: columnReducers,
   },
 });
 
