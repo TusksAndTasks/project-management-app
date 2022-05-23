@@ -11,13 +11,14 @@ import PageNotFound from '../pageNotFound/pageNotFound';
 import './app.scss';
 import { useLogInData } from '../../helpers/hooks/useLogInData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
+import Welcome from '../../feature/welcome/welcome';
 
 const { Header, Content, Footer } = Layout;
 
 function App() {
   const [logInState] = useLogInData();
-  const [, getUserToken] = useAuthToken();
-  const [authToken] = useAuthToken();
+  const [authToken, getUserToken] = useAuthToken();
+
 
   useEffect(() => {
     getUserToken();
