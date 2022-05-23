@@ -31,11 +31,12 @@ function App() {
       </Header>
       <Content>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={authToken ? <Main /> : <Welcome />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/LogIn" element={authToken ? <Main /> : <LogIn />} />
           <Route path="/SignUp" element={authToken ? <Main /> : <SignUp />} />
           <Route path="/demo" element={<DesignComponents />} />
+          <Route path="/Board" element={<Board />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Content>
