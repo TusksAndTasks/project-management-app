@@ -1,4 +1,4 @@
-const URLBase = 'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000/';
+const URLBase = 'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000';
 
 export const URLs = {
   signUp: `${URLBase}/signup`,
@@ -12,5 +12,11 @@ export const URLs = {
       return `${URLBase}/boards/${boardId}/columns`;
     }
     return `${URLBase}/boards/${boardId}/columns/${columnId}`;
+  },
+  tasks: (boardId: string, columnId: string, taskId?: string) => {
+    if (!taskId) {
+      return `${URLBase}/boards/${boardId}/columns/${columnId}/tasks`;
+    }
+    return `${URLBase}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
   },
 };
