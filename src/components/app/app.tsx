@@ -14,6 +14,7 @@ import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import Welcome from '../../feature/welcome/welcome';
 import Board from '../../feature/board/board';
 import ErrorBoundary from '../errorBoundary/errorBoundary';
+import Boards from '../../feature/boards/boards';
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={authToken ? <Main /> : <Welcome />} />
             <Route path="/Profile" element={authToken && <Profile />} />
+            <Route path="/Boards" element={authToken && <Boards />} />
             <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
             <Route path="/People" element={authToken && <Navigate to="/" />} />
             <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
