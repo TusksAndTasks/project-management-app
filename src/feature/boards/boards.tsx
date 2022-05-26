@@ -8,7 +8,7 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { useBoardData } from '../../helpers/hooks/useBoardData';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import IconText from './iconText';
-import { locales } from '../main/locales';
+import { locales } from './locales';
 import './boards.scss';
 import { BoardCreatorForm } from '../../components/boardCreatorForm.tsx/boardCreatorForm';
 
@@ -19,8 +19,11 @@ export default function Boards() {
   const [authToken] = useAuthToken();
   const [language] = useLocales();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const showModal = () => {
+  const [isToDel, setIsToDel] = useState(false);
+
+  const showModal = (value: string) => {
     setIsModalVisible(true);
+    if (value === 'del') setIsToDel(true);
   };
   const handleClose = () => {
     setIsModalVisible(false);
@@ -37,19 +40,10 @@ export default function Boards() {
 
   return (
     <>
-      <button className="btn btn-create" type="button" onClick={showModal}>
+      <button className="btn btn-create" type="button" onClick={() => showModal('new')}>
         <PlusCircleFilled />
         {locales[language].createButton}
       </button>
-      <Modal
-        title={locales[language].creatorTitle}
-        visible={isModalVisible}
-        onCancel={handleClose}
-        footer={[]}
-      >
-        <BoardCreatorForm createBoard={createBoard} authToken={authToken} handleOk={handleClose} />
-      </Modal>
-
       <List
         itemLayout="vertical"
         size="large"
@@ -64,10 +58,10 @@ export default function Boards() {
           <List.Item
             key={item.id}
             actions={[
-              <IconText icon={SnippetsOutlined} text="10" key="list-vertical-star-o" />,
+              <IconText icon={SnippetsOutlined} text="?" key="list-vertical-star-o" />,
               <IconText icon={FileImageOutlined} text="2" key="list-vertical-message" />,
             ]}
-            extra={(
+            extra={
               <>
                 <Link
                   className="btn btn-primary"
@@ -82,21 +76,51 @@ export default function Boards() {
                   className="btn btn-primary btn-delete"
                   type="button"
                   id={item.id}
-                  onClick={(e) => deleteBoard({ id: (e.target as HTMLElement).id, token: authToken })}
+                  onClick={() => showModal('del')}
                 >
                   {locales[language].deleteButton}
                 </button>
               </>
-            )}
+            }
           >
             <List.Item.Meta
-              title={(
+              title={
                 <Link to="/Board" id={item.id} onClick={(e) => getBoardsData(e)}>
                   {item.title}
                 </Link>
-              )}
+              }
               description={item.description}
             />
+            <Modal
+              title={isToDel ? locales[language].deleteTitle : locales[language].creatorTitle}
+              visible={isModalVisible}
+              onCancel={handleClose}
+              footer={[]}
+            >
+              {isToDel ? (
+                <>
+                  <div>
+                    {locales[language].deleteText}
+                    <span>{item.title}</span>
+                  </div>
+                  <button
+                    type="button"
+                    id={item.id}
+                    onClick={(e) =>
+                      deleteBoard({ id: (e.target as HTMLElement).id, token: authToken })
+                    }
+                  >
+                    {locales[language].deleteButton}
+                  </button>
+                </>
+              ) : (
+                <BoardCreatorForm
+                  createBoard={createBoard}
+                  authToken={authToken}
+                  handleOk={handleClose}
+                />
+              )}
+            </Modal>
           </List.Item>
         )}
       />
