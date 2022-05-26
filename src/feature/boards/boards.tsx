@@ -24,6 +24,7 @@ export default function Boards() {
   const showModal = (value: string) => {
     setIsModalVisible(true);
     if (value === 'del') setIsToDel(true);
+    if (value === 'new') setIsToDel(false);
   };
   const handleClose = () => {
     setIsModalVisible(false);
