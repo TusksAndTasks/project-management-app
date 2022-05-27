@@ -19,6 +19,7 @@ const logUser = createAsyncThunk<ILogInResponse, ILogInData, Record<string, neve
       body: JSON.stringify(data),
     });
     if (response.ok) {
+      localStorage.setItem('user', data.login);
       return response.json();
     }
     const err = await response.json();
@@ -42,6 +43,7 @@ const logInSlice = createSlice({
       state.error = '';
     });
     builder.addCase(logUser.rejected, (state, action) => {
+      localStorage.removeItem('user');
       state.loading = false;
       state.error = action.error.message as string;
     });
