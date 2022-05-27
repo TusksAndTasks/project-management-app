@@ -5,10 +5,11 @@ import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import './profile.scss';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
+import { IUserUpdateState } from '../../redux/slices/users/usersTypes';
 
 export default function Profile() {
   const [authToken] = useAuthToken();
-  const [usersData, getUsersList] = useUserData();
+  const [usersData, getUsersList, updateCurrentUser] = useUserData();
   const [language] = useLocales();
 
   useEffect(() => {
@@ -28,36 +29,52 @@ export default function Profile() {
             .map((user) => (
               <Form
                 name="updateUserForm"
+                key={user.id}
                 initialValues={{ remember: true }}
+                onFinish={(data: IUserUpdateState) => updateCurrentUser(data)}
                 autoComplete="off"
                 labelAlign="left"
                 wrapperCol={{ span: 24 }}
                 labelCol={{ span: 24 }}
                 fields={[
                   {
-                    name: ['Login'],
+                    name: ['login'],
                     value: user.login,
                   },
                   {
-                    name: ['Name'],
+                    name: ['name'],
                     value: user.name,
                   },
                   {
-                    name: ['Password'],
+                    name: ['password'],
                     value: '',
+                  },
+                  {
+                    name: ['id'],
+                    value: user.id,
+                  },
+                  {
+                    name: ['token'],
+                    value: authToken,
                   },
                 ]}
               >
-                <Form.Item name="Login" label={locales[language].login} className="form-label">
+                <Form.Item name="login" label={locales[language].login} className="form-label">
                   <Typography>
                     <pre>{user.login}</pre>
                   </Typography>
                 </Form.Item>
-                <Form.Item name="Name" label={locales[language].name} className="form-label">
+                <Form.Item name="id" style={{ display: 'none' }}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="token" style={{ display: 'none' }}>
+                  <Input />
+                </Form.Item>
+                <Form.Item name="name" label={locales[language].name} className="form-label">
                   <Input />
                 </Form.Item>
                 <Form.Item
-                  name="Password"
+                  name="password"
                   label={locales[language].password}
                   className="form-label"
                 >
@@ -65,7 +82,7 @@ export default function Profile() {
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 11 }}>
                   <Button type="primary" className="btn btn-primary" htmlType="submit">
-                    Submit
+                    {locales[language].button}
                   </Button>
                 </Form.Item>
               </Form>
