@@ -30,6 +30,11 @@ export default function Boards() {
     setIsModalVisible(false);
   };
 
+  const handleToDel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    deleteBoard({ id: (e.target as HTMLElement).id, token: authToken });
+    handleClose();
+  };
+
   useEffect(() => {
     getBoardsList(authToken);
   }, []);
@@ -49,9 +54,6 @@ export default function Boards() {
         itemLayout="vertical"
         size="large"
         pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
           pageSize: 3,
         }}
         dataSource={boardsData.boards}
@@ -104,13 +106,7 @@ export default function Boards() {
                     {locales[language].deleteText}
                     <span>{item.title}</span>
                   </div>
-                  <button
-                    type="button"
-                    id={item.id}
-                    onClick={(e) =>
-                      deleteBoard({ id: (e.target as HTMLElement).id, token: authToken })
-                    }
-                  >
+                  <button type="button" id={item.id} onClick={(e) => handleToDel(e)}>
                     {locales[language].deleteButton}
                   </button>
                 </>
