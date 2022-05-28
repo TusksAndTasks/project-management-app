@@ -8,6 +8,7 @@ import {
   IFullTask,
   IGetTasksData,
   ITasksState,
+  IUpdateTaskData,
 } from './tasksTypes';
 
 const initialState: ITasksState = {
@@ -66,6 +67,23 @@ const deleteTask = createAsyncThunk<IDeleteReturn, IDeleteTaskData, Record<never
   }
 );
 
+const updateTask = createAsyncThunk<IFullTask, IUpdateTaskData, Record<never, string>>(
+  'tasks/updateTask',
+  async (data) => {
+    const { boardId, columnId, taskId, token, body } = data;
+    const response = await fetch(URLs.tasks(boardId, columnId, taskId), {
+      method: 'PUT',
+      headers: getHeaders(token),
+      body: JSON.stringify({ boardId, columnId, ...body }),
+    });
+    if (response.ok) {
+      return response.json();
+    }
+    const err = await response.json();
+    throw new Error(err.message);
+  }
+);
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -77,7 +95,7 @@ const tasksSlice = createSlice({
     builder.addCase(getTasks.fulfilled, (state, action) => {
       state.loading = false;
       if (action.payload.length > 0) {
-        state.tasks[action.payload[0].columnId] = action.payload;
+        state.tasks[action.payload[0].columnId] = action.payload.sort((a, b) => a.order - b.order);
       }
       state.error = '';
     });
@@ -117,8 +135,24 @@ const tasksSlice = createSlice({
       state.loading = false;
       state.error = action.error.message as string;
     });
+    builder.addCase(updateTask.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateTask.fulfilled, (state, action) => {
+      const { id, columnId } = action.payload;
+      state.tasks[columnId] = state.tasks[columnId].map((task) => {
+        if (task.id === id) {
+          return action.payload;
+        }
+        return task;
+      });
+    });
+    builder.addCase(updateTask.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message as string;
+    });
   },
 });
 
 export const tasksReducers = tasksSlice.reducer;
-export { getTasks, createTask, deleteTask };
+export { getTasks, createTask, deleteTask, updateTask };

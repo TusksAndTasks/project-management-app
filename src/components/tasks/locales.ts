@@ -5,6 +5,10 @@ export const locales = {
     done: 'Выполнен',
     undone: 'Не выполнен',
     delete: 'Удалить задачу',
+    changeData: 'Изменить содержимое задачи',
+    modalTitle: 'Текущая задача',
+    update: 'Обновить',
+    showButton: 'Показать задачу',
   },
   English: {
     title: 'Title: ',
@@ -12,5 +16,9 @@ export const locales = {
     done: 'Complited',
     undone: 'Not complited',
     delete: 'Delete Task',
+    changeData: 'Change task data',
+    modalTitle: 'Current task',
+    update: 'Update',
+    showButton: 'Show task',
   },
 };
