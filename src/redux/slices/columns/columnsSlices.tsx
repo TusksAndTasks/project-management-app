@@ -2,7 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getHeaders } from '../../../helpers/helperFunctions/boardHelper';
 import { URLs } from '../../../helpers/requestURLs';
 import { IColumn } from '../board/boardTypes';
-import { IGetColumnData, IColumnState, ICreateColumnData, IDeleteColumnData } from './columnsTypes';
+import {
+  IGetColumnData,
+  IColumnState,
+  ICreateColumnData,
+  IDeleteColumnData,
+  IUpdateColumnData,
+} from './columnsTypes';
 
 const initialState: IColumnState = {
   columns: [] as Array<IColumn>,
@@ -59,8 +65,23 @@ const deleteColumnThunk = createAsyncThunk<string, IDeleteColumnData, Record<nev
     throw new Error(err.message);
   }
 );
-/* Нужно создать также редюсер апдейта, и изменять order параметр колонок после удаления.
-Иначе можно удалить вторую из трех колонок, порядок поломается и создать новую не удастстся. */
+
+const updateColumnThunk = createAsyncThunk<IColumn, IUpdateColumnData, Record<never, string>>(
+  'columns/updateColumn',
+  async (data) => {
+    const { boardId, columnId, token, title, order } = data;
+    const response = await fetch(URLs.columns(boardId, columnId), {
+      method: 'PUT',
+      headers: getHeaders(token),
+      body: JSON.stringify({ title, order }),
+    });
+    if (response.ok) {
+      return response.json();
+    }
+    const err = await response.json();
+    throw new Error(err.message);
+  }
+);
 
 const columnsSlice = createSlice({
   name: 'columns',
@@ -103,8 +124,25 @@ const columnsSlice = createSlice({
       state.loading = false;
       state.error = action.error.message as string;
     });
+    builder.addCase(updateColumnThunk.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateColumnThunk.fulfilled, (state, action) => {
+      state.loading = false;
+      state.columns = state.columns.map((column) => {
+        if (column.id === action.payload.id) {
+          return action.payload;
+        }
+        return column;
+      });
+      state.error = '';
+    });
+    builder.addCase(updateColumnThunk.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message as string;
+    });
   },
 });
 
 export const columnReducers = columnsSlice.reducer;
-export { getColumnsThunk, createColumnThunk, deleteColumnThunk };
+export { getColumnsThunk, createColumnThunk, deleteColumnThunk, updateColumnThunk };
