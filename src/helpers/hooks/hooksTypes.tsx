@@ -1,6 +1,11 @@
 import { ICurrentBoardState, IShowState } from '../../redux/slices/board/boardTypes';
 import { IBoardState, ICreateState, IDeleteState } from '../../redux/slices/boards/boardsTypes';
 import {
+  IUserState,
+  IUserUpdateState,
+  IUserDeleteState,
+} from '../../redux/slices/users/usersTypes';
+import {
   IColumnState,
   ICreateColumnData,
   IDeleteColumnData,
@@ -21,4 +26,11 @@ export type IUseColumnsReturn = [
   (data: IGetColumnData) => void,
   (data: ICreateColumnData) => void,
   (data: IDeleteColumnData) => void
+];
+
+export type IUseUsersReturn = [
+  IUserState,
+  (token: string) => void,
+  (data: IUserUpdateState) => void,
+  (data: IUserDeleteState) => void
 ];

@@ -1,0 +1,26 @@
+@media screen and (max-width: 576px){
+  .ant-list-vertical .ant-list-item {
+    flex-wrap: wrap;
+    text-align: center;
+  }
+}
+.btn.btn-delete {
+  margin-left: 20px;
+}
+
+.ant-list-split .ant-list-item {
+  border-top: 1px solid var(--color-secondary-lighter);
+}
+
+.ant-pagination-item-active {
+  border-color: var(--color-primary);
+  &:hover,
+  &:hover a {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-secondary-lighter);
+  }
+  a {
+    color: var(--color-primary);
+  }
+}

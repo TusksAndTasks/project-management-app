@@ -1,0 +1,17 @@
+.conform-modal {
+  span {
+    text-transform: uppercase;
+    color: var(--color-secondary)
+  }
+}
+
+.ant-btn.btn-delete {
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 10px;
+
+  &:hover {
+    color: var(--color-secondary-lighter)
+  }
+
+}
