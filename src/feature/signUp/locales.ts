@@ -11,6 +11,7 @@ export const locales = {
     passwordRequired: 'Пожалуйста, укажите пароль!',
     passwordMin: 'Пароль должен быть длинее 8 символов!',
     passwordPattern: 'Пароль должен содержать только цифры и английские буквы!',
+    successSignUp: 'Войти в систему',
   },
   English: {
     title: 'Sign up page',
@@ -24,5 +25,6 @@ export const locales = {
     passwordRequired: 'Please input your password!',
     passwordMin: 'Password must be longer than 8 characters!',
     passwordPattern: 'Password must include only numbers and latin letters!',
+    successSignUp: 'You can now login',
   },
 };
