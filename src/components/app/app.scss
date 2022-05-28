@@ -1,16 +1,18 @@
-.app-wrapper{
-    height: 100%;
-}
+#root {
+    .app-wrapper{
+        height: 100%;
+    }
 
-.ant-layout-header {
-    background: #fff;
-}
+    .ant-layout-header {
+        background: #fff;
+    }
 
-.ant-layout-content {
-    padding-top: 100px;
-}
+    .ant-layout-content {
+        padding-top: 100px;
+    }
 
-.ant-layout-footer {
-    background: #2A4B64;
-    color: #fff
+    .ant-layout-footer {
+        background: #2A4B64;
+        color: #fff
+    }
 }
