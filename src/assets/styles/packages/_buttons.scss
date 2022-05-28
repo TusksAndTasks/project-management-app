@@ -6,6 +6,9 @@
   &:hover {
     background-color: var(--color-primary);
     color: var(--color-secondary-lighter);
+    span {
+      color: var(--color-secondary-lighter);
+    }
   }
 }
 
