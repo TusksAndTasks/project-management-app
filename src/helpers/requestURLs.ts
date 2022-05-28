@@ -1,4 +1,4 @@
-const URLBase = 'http://88.99.225.196:4000';
+const URLBase = 'https://protected-plains-28211.herokuapp.com';
 
 export const URLs = {
   signUp: `${URLBase}/signup`,

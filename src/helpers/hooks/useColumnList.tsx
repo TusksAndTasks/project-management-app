@@ -33,7 +33,6 @@ export function useColumnList(): IUseColumnsReturn {
 
   const updateColumn = (data: IUpdateColumnData) => {
     dispatch(updateColumnThunk(data));
-    console.log(data);
   };
 
   return [columnsData, getColumnsList, createColumn, deleteColumn, updateColumn];
