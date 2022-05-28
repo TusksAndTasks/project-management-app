@@ -1,0 +1,50 @@
+.ant-list-grid .ant-col .ant-list-item {
+  min-width: 220px;
+  max-width: 220px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.ant-card {
+  box-shadow: rgba(128, 138, 145, 0.5) 0 5px 15px;
+}
+
+.ant-avatar-image {
+  margin-right: 10px;
+}
+.card-none-profile {
+  min-width: 220px;
+  max-width: 220px;
+  text-align: center;
+  margin-top: 20px;
+
+  .none-profile-text {
+    padding-top: 10px;
+
+    .anticon-plus-circle svg {
+      color: var(--color-green-light)
+    }
+
+    span {
+      padding-right: 5px;
+    }
+  }
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1155px){
+  .frontpage-image {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1156px){
+  .frontpage-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
