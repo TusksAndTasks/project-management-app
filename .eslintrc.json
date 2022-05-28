@@ -44,7 +44,9 @@
       "no-param-reassign":"off",
       "import/prefer-default-export": "off",
       "jsx-a11y/label-has-associated-control": "off",
-      "jsx-a11y/control-has-associated-label": "off"
+      "jsx-a11y/control-has-associated-label": "off",
+      "react/jsx-wrap-multilines": 0,
+      "react/jsx-curly-newline": "off"
     },
     "settings": {
       "react": {
