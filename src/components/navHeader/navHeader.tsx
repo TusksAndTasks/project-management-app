@@ -52,40 +52,48 @@ export default function NavHeader() {
           {locales[language].createBoard}
         </Button>
       )}
-      <Menu mode="horizontal" className="nav-right">
-        <Menu.Item>
-          <Switch
-            onChange={changeMode}
-            checkedChildren={LanguageEnum.ENG}
-            unCheckedChildren={LanguageEnum.RUS}
-            defaultChecked
-          />
-        </Menu.Item>
-        {authToken && (
+      {authToken ? (
+        <Menu mode="horizontal" className="nav-right">
+          <Menu.Item>
+            <Switch
+              onChange={changeMode}
+              checkedChildren={LanguageEnum.ENG}
+              unCheckedChildren={LanguageEnum.RUS}
+              defaultChecked
+            />
+          </Menu.Item>
           <Menu.Item key="profile" icon={<SettingOutlined />}>
             {locales[language].profileLink}
             <Link to="/Profile" />
           </Menu.Item>
-        )}
-        {!authToken && (
-          <Menu.Item key="logIn" icon={<LoginOutlined />}>
-            {locales[language].logInLink}
-            <Link to="/LogIn" />
-          </Menu.Item>
-        )}
-        {!authToken && (
-          <Menu.Item key="signUp" icon={<UsergroupAddOutlined />}>
-            {locales[language].signUpLink}
-            <Link to="/SignUp" />
-          </Menu.Item>
-        )}
-        {authToken && (
+
           <Menu.Item key="home" icon={<LogoutOutlined />} onClick={deleteUserToken}>
             {locales[language].signOut}
             <Link to="/" />
           </Menu.Item>
-        )}
-      </Menu>
+        </Menu>
+      ) : (
+        <Menu mode="horizontal" className="nav-right">
+          <Menu.Item>
+            <Switch
+              onChange={changeMode}
+              checkedChildren={LanguageEnum.ENG}
+              unCheckedChildren={LanguageEnum.RUS}
+              defaultChecked
+            />
+          </Menu.Item>
+
+          <Menu.Item key="logIn" icon={<LoginOutlined />}>
+            {locales[language].logInLink}
+            <Link to="/LogIn" />
+          </Menu.Item>
+
+          <Menu.Item key="signUp" icon={<UsergroupAddOutlined />}>
+            {locales[language].signUpLink}
+            <Link to="/SignUp" />
+          </Menu.Item>
+        </Menu>
+      )}
       <Modal
         title={locales[language].createBoard}
         visible={isModalVisible}
