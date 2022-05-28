@@ -75,6 +75,9 @@ header {
     .ant-switch-checked {
         background: var(--color-primary);
     }
+    .ant-image-mask:hover {
+        opacity: 0;
+    }
 }
 
 .ant-layout-header {

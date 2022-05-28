@@ -1,6 +1,6 @@
 import './navHeader.scss';
 import { Link } from 'react-router-dom';
-import { Button, Menu, Modal, Switch } from 'antd';
+import { Button, Image, Menu, Modal, Switch } from 'antd';
 import {
   HomeOutlined,
   LoginOutlined,
@@ -17,6 +17,7 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { BoardCreatorForm } from '../boardCreatorForm.tsx/boardCreatorForm';
 import { useBoardsList } from '../../helpers/hooks/useBoardsList';
+import logo from '../../assets/img/logo-kanban.png';
 
 export default function NavHeader() {
   const [language, setLang] = useLocales();
@@ -35,8 +36,11 @@ export default function NavHeader() {
   };
   return (
     <>
-      <div className="logo" />
       <Menu defaultSelectedKeys={['main']} mode="horizontal" className="nav-left">
+        <Menu.Item key="logo">
+          <Image width={55} src={logo} />
+          <Link to="/" />
+        </Menu.Item>
         <Menu.Item key="main" icon={<HomeOutlined />}>
           {locales[language].mainLink}
           <Link to="/" />
