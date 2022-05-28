@@ -11,6 +11,7 @@ import IconText from './iconText';
 import { locales } from './locales';
 import './boards.scss';
 import { BoardCreatorForm } from '../../components/boardCreatorForm.tsx/boardCreatorForm';
+import ConformModal from '../../components/conformModal/conformModal';
 
 export default function Boards() {
   const [boardsData, getBoardsList, createBoard, deleteBoard] = useBoardsList();
@@ -20,6 +21,7 @@ export default function Boards() {
   const [language] = useLocales();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isToDel, setIsToDel] = useState(false);
+  const [currentItem, setCurrentItem] = useState({ id: '', title: '' });
 
   const showModal = (value: string) => {
     setIsModalVisible(true);
@@ -31,8 +33,14 @@ export default function Boards() {
   };
 
   const handleToDel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    deleteBoard({ id: (e.target as HTMLElement).id, token: authToken });
-    handleClose();
+    showModal('del');
+    const currentTitle = boardsData.boards.filter((element) => element.id === e.currentTarget.id)[0]
+      .title;
+
+    setCurrentItem({
+      id: e.currentTarget.id,
+      title: currentTitle,
+    });
   };
 
   useEffect(() => {
@@ -79,7 +87,7 @@ export default function Boards() {
                   className="btn btn-primary btn-delete"
                   type="button"
                   id={item.id}
-                  onClick={() => showModal('del')}
+                  onClick={(e) => handleToDel(e)}
                 >
                   {locales[language].deleteButton}
                 </button>
@@ -101,15 +109,12 @@ export default function Boards() {
               footer={[]}
             >
               {isToDel ? (
-                <>
-                  <div>
-                    {locales[language].deleteText}
-                    <span>{item.title}</span>
-                  </div>
-                  <button type="button" id={item.id} onClick={(e) => handleToDel(e)}>
-                    {locales[language].deleteButton}
-                  </button>
-                </>
+                <ConformModal
+                  deleteItem={deleteBoard}
+                  authToken={authToken}
+                  handleOk={handleClose}
+                  itemToDel={{ id: currentItem.id, name: currentItem.title }}
+                />
               ) : (
                 <BoardCreatorForm
                   createBoard={createBoard}
