@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Layout } from 'antd';
 import NavHeader from '../navHeader/navHeader';
-import Main from '../../feature/main/main';
 import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
 import SignUp from '../../feature/signUp/signUp';
@@ -34,10 +33,8 @@ function App() {
       <Content>
         <ErrorBoundary>
           <Routes>
-            <Route path="/" element={authToken ? <Main /> : <Welcome />} />
+            <Route path="/" element={authToken ? <Boards /> : <Welcome />} />
             <Route path="/Profile" element={authToken && <Profile />} />
-            <Route path="/Boards" element={authToken && <Boards />} />
-            <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
             <Route path="/People" element={authToken && <Navigate to="/" />} />
             <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
             <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
