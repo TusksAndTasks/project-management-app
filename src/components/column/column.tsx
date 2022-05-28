@@ -50,7 +50,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
             onChange={(e) => setColumnTitle(e.target.value)}
           />
           <Button type="primary" onClick={() => updateColumnTitle()}>
-            Submit
+            {locales[language].updateColumn}
           </Button>
         </Input.Group>
       ) : (

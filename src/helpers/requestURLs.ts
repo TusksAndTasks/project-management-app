@@ -19,4 +19,5 @@ export const URLs = {
     }
     return `${URLBase}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
   },
+  users: (id?: string) => (id ? `${URLBase}/users/${id}` : `${URLBase}/users`),
 };

@@ -7,6 +7,7 @@ import { localizationReducers } from './slices/localization/localizationSlice';
 import { logInReducer } from './slices/logIn/logInSlice';
 import { signUpReducer } from './slices/signUp/signUpSlice';
 import { tasksReducers } from './slices/tasks/tasksSlice';
+import { usersReducers } from './slices/users/usersSlice';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     board: boardReducers,
     columns: columnReducers,
     tasks: tasksReducers,
+    users: usersReducers,
   },
 });
 

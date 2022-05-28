@@ -14,11 +14,13 @@ const authSlice = createSlice({
       if (token) {
         state.token = token;
       } else {
+        localStorage.removeItem('user');
         state.token = '';
       }
     },
     deleteAuthToken: (state) => {
       document.cookie = `${encodeURIComponent('login')}=${encodeURIComponent('')}`;
+      localStorage.removeItem('user');
       state.token = '';
     },
   },
