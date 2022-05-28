@@ -20,7 +20,7 @@ export interface IFullTask {
   userId: string;
   boardId: string;
   columnId: string;
-  files: [
+  files?: [
     {
       filename: string;
       fileSize: number;
@@ -50,4 +50,17 @@ export interface IDeleteTaskData {
   columnId: string;
   taskId: string;
   token: string;
+}
+
+export interface IUpdateTaskData {
+  boardId: string;
+  columnId: string;
+  taskId: string;
+  token: string;
+  body: {
+    title: string;
+    order: number;
+    description: string;
+    userId: string;
+  };
 }

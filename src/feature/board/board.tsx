@@ -25,9 +25,7 @@ export function Board() {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
       });
     }
-  }, [columnsData.columns, boardId]);
-
-  console.log(columnsData.columns);
+  }, [columnsData.columns]);
 
   const showModal = () => {
     setIsModalVisible(true);
