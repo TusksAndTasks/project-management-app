@@ -8,14 +8,7 @@ import { AppDispatch } from '../../redux/store';
 import { locales } from './locales';
 import { IJtwToken, ITaskFormProps, ITaskNames } from './taskFormTypes';
 
-export function TaskForm({
-  nameList,
-  ruleList,
-  order,
-  boardId,
-  columnId,
-  handleClose,
-}: ITaskFormProps) {
+export function TaskForm({ nameList, ruleList, boardId, columnId, handleClose }: ITaskFormProps) {
   const keys = Object.keys(nameList);
   const [language] = useLocales();
   const dispatch = useDispatch() as AppDispatch;
@@ -24,8 +17,6 @@ export function TaskForm({
   function submitTaskForm(data: { title: string; description: string }) {
     const body = {
       ...data,
-      order,
-      done: false,
       userId: decodedToken,
     };
     dispatch(createTask({ token: authToken, boardId, columnId, body }));

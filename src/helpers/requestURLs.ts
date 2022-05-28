@@ -1,4 +1,4 @@
-const URLBase = 'https://cors-anywhere.herokuapp.com/http://88.99.225.196:4000';
+const URLBase = 'http://88.99.225.196:4000';
 
 export const URLs = {
   signUp: `${URLBase}/signup`,

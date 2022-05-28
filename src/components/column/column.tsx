@@ -20,7 +20,6 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   const ids = { boardId, columnId: column.id };
   const getLists = taskHelp();
   const { nameList, ruleList } = getLists(language);
-  const order = tasks[column.id] ? tasks[column.id].length + 1 : 1;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
@@ -40,7 +39,9 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
       </button>
       <button
         type="button"
-        onClick={() => deleteColumn({ token: authToken, boardId, columnId: column.id })}
+        onClick={() => {
+          deleteColumn({ token: authToken, boardId, columnId: column.id });
+        }}
       >
         {locales[language].deleteColumn}
       </button>
@@ -53,7 +54,6 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
         <TaskForm
           nameList={nameList}
           ruleList={ruleList}
-          order={order}
           boardId={boardId}
           columnId={column.id}
           handleClose={handleClose}

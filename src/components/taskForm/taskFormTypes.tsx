@@ -12,7 +12,6 @@ export type ITaskRules = { [key: string]: Rule[] };
 export interface ITaskFormProps {
   nameList: ITaskNames;
   ruleList: ITaskRules;
-  order: number;
   boardId: string;
   columnId: string;
   handleClose: () => void;

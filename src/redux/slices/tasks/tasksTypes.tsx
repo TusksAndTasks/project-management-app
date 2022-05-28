@@ -40,8 +40,6 @@ export interface ICreateTaskData {
   columnId: string;
   body: {
     title: string;
-    order: number;
-    done: boolean;
     description: string;
     userId: string;
   };

@@ -13,7 +13,6 @@ export interface IGetColumnData {
 
 export interface ICreateColumnData {
   title: string;
-  order: number;
   token: string;
   boardId: string;
 }

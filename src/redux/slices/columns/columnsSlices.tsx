@@ -29,11 +29,11 @@ const getColumnsThunk = createAsyncThunk<IColumn[], IGetColumnData, Record<never
 const createColumnThunk = createAsyncThunk<IColumn, ICreateColumnData, Record<never, string>>(
   'columns/createColumn',
   async (data) => {
-    const { title, order, token, boardId } = data;
+    const { title, token, boardId } = data;
     const response = await fetch(URLs.columns(boardId), {
       method: 'POST',
       headers: getHeaders(token),
-      body: JSON.stringify({ title, order }),
+      body: JSON.stringify({ title }),
     });
     if (response.ok) {
       return response.json();

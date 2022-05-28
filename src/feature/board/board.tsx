@@ -25,7 +25,7 @@ export function Board() {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
       });
     }
-  }, [columnsData, boardId]);
+  }, [columnsData.columns, boardId]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -38,7 +38,6 @@ export function Board() {
     createNewColumn({
       token: authToken,
       boardId,
-      order: columnsData.columns.length + 1,
       title: data.title,
     });
     handleClose();
