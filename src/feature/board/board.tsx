@@ -27,6 +27,8 @@ export function Board() {
     }
   }, [columnsData.columns, boardId]);
 
+  console.log(columnsData.columns);
+
   const showModal = () => {
     setIsModalVisible(true);
   };

@@ -5,6 +5,7 @@ import {
   ICreateColumnData,
   IDeleteColumnData,
   IGetColumnData,
+  IUpdateColumnData,
 } from '../../redux/slices/columns/columnsTypes';
 
 export type IUseBoardsReturn = [
@@ -20,5 +21,6 @@ export type IUseColumnsReturn = [
   IColumnState,
   (data: IGetColumnData) => void,
   (data: ICreateColumnData) => void,
-  (data: IDeleteColumnData) => void
+  (data: IDeleteColumnData) => void,
+  (data: IUpdateColumnData) => void
 ];

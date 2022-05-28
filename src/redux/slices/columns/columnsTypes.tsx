@@ -22,3 +22,11 @@ export interface IDeleteColumnData {
   columnId: string;
   token: string;
 }
+
+export interface IUpdateColumnData {
+  boardId: string;
+  columnId: string;
+  token: string;
+  title: string;
+  order: number;
+}

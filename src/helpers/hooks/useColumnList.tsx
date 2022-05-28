@@ -3,11 +3,13 @@ import {
   createColumnThunk,
   deleteColumnThunk,
   getColumnsThunk,
+  updateColumnThunk,
 } from '../../redux/slices/columns/columnsSlices';
 import {
   ICreateColumnData,
   IDeleteColumnData,
   IGetColumnData,
+  IUpdateColumnData,
 } from '../../redux/slices/columns/columnsTypes';
 import { AppDispatch, IState } from '../../redux/store';
 import { IUseColumnsReturn } from './hooksTypes';
@@ -29,5 +31,10 @@ export function useColumnList(): IUseColumnsReturn {
     dispatch(deleteColumnThunk(data));
   };
 
-  return [columnsData, getColumnsList, createColumn, deleteColumn];
+  const updateColumn = (data: IUpdateColumnData) => {
+    dispatch(updateColumnThunk(data));
+    console.log(data);
+  };
+
+  return [columnsData, getColumnsList, createColumn, deleteColumn, updateColumn];
 }

@@ -3,4 +3,9 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+
+    &_title{
+        border: none;
+        background-color: none;
+    }
 }
