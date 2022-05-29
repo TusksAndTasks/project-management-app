@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Layout } from 'antd';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import NavHeader from '../navHeader/navHeader';
 import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
@@ -32,18 +34,22 @@ function App() {
         <NavHeader />
       </Header>
       <Content>
-        <ErrorBoundary>
-          <Routes>
-            <Route path="/" element={authToken ? <Boards /> : <Welcome />} />
-            <Route path="/Profile" element={authToken && <Profile />} />
-            <Route path="/People" element={authToken && <Navigate to="/" />} />
-            <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
-            <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
-            <Route path="/demo" element={<DesignComponents />} />
-            <Route path="/Board" element={authToken ? <Board /> : <Navigate to="/LogIn" />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </ErrorBoundary>
+        <DndProvider backend={HTML5Backend}>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={authToken ? <Boards /> : <Welcome />} />
+              <Route path="/Profile" element={authToken && <Profile />} />
+              <Route path="/Boards" element={authToken && <Boards />} />
+              <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
+              <Route path="/People" element={authToken && <Navigate to="/" />} />
+              <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
+              <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
+              <Route path="/demo" element={<DesignComponents />} />
+              <Route path="/Board" element={authToken && <Board />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </ErrorBoundary>
+        </DndProvider>
       </Content>
       <Footer>
         <FooterBottom />

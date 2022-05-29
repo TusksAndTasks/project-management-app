@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
+import { useDrag, useDrop } from 'react-dnd';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
-import { deleteTask, updateTask } from '../../redux/slices/tasks/tasksSlice';
+import { deleteTask, removeTask, updateTask } from '../../redux/slices/tasks/tasksSlice';
 import { AppDispatch } from '../../redux/store';
 import './task.scss';
 import { ITaskProps } from './taskTypes';
+import { IFullTask, IUpdateTaskData } from '../../redux/slices/tasks/tasksTypes';
 
 export default function Task({ task, ids }: ITaskProps) {
   const [language] = useLocales();
@@ -33,6 +35,7 @@ export default function Task({ task, ids }: ITaskProps) {
     boardId,
     columnId,
     taskId: task.id,
+    newColumn: columnId,
   };
 
   function changeTaskData() {
@@ -45,8 +48,46 @@ export default function Task({ task, ids }: ITaskProps) {
     setIsTaskUpdates(false);
   }
 
+  const ref = useRef(null);
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'task',
+    item: { ...task },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
+    accept: 'task',
+    drop(item: IFullTask) {
+      if (item.id === task.id) {
+        return;
+      }
+      const data = {
+        body: {
+          description: item.description,
+          title: item.title,
+          order: task.order,
+          userId: item.userId,
+        },
+        token: authToken,
+        boardId,
+        columnId: item.columnId,
+        taskId: item.id,
+        newColumn: task.columnId,
+      } as IUpdateTaskData;
+      dispatch(updateTask(data));
+      if (item.columnId !== task.columnId) {
+        dispatch(removeTask({ columnId: item.columnId, taskId: item.id }));
+      }
+    },
+  });
+
+  drop(drag(ref));
+
   return (
-    <div className="task">
+    <div className={isDragging ? 'task__dragged' : 'task'} ref={ref}>
       <div>{locales[language].title + task.title}</div>
       <button type="button" onClick={showModal}>
         {locales[language].showButton}

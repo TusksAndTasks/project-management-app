@@ -5,6 +5,7 @@ export const locales = {
     name: 'Имя',
     password: 'Пароль',
     button: 'Сохранить',
+
     deleteButton: 'Удалить',
     resetButton: 'Сбросить',
     loading: 'Идёт загрузка данных профиля',
