@@ -8,7 +8,7 @@ header {
     .ant-menu-title-content {
         color: var(--color-primary);
         text-decoration: none;
-        font-size: 1.4em;
+        font-size: 20px;
         font-weight: 700;
     }
 
@@ -61,6 +61,22 @@ header {
 
     .ant-menu-horizontal.ant-menu-light {
         border: none;
+    }
+
+    .ant-btn.ant-btn-default.btn-create {
+        margin: auto;
+        min-width: fit-content;
+        padding: 10px 30px;
+        display: flex;
+        align-items: center;
+        min-height: 40px;
+    }
+
+    .ant-switch-checked {
+        background: var(--color-primary);
+    }
+    .ant-image-mask:hover {
+        opacity: 0;
     }
 }
 
