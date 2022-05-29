@@ -16,6 +16,7 @@ import Welcome from '../../feature/welcome/welcome';
 import { Board } from '../../feature/board/board';
 import ErrorBoundary from '../errorBoundary/errorBoundary';
 import Boards from '../../feature/boards/boards';
+import FooterBottom from '../footer/footerBottom';
 
 const { Header, Content, Footer } = Layout;
 
@@ -50,7 +51,9 @@ function App() {
           </ErrorBoundary>
         </DndProvider>
       </Content>
-      <Footer>@Team44</Footer>
+      <Footer>
+        <FooterBottom />
+      </Footer>
     </Layout>
   );
 }
