@@ -4,7 +4,7 @@ import { MenuProps } from 'antd/es/menu';
 export type MenuItem = Required<MenuProps>['items'][number];
 
 export default function getItem(
-  label: string,
+  label: React.ReactNode,
   key?: React.Key | null,
   icon?: React.ReactNode,
   children?: MenuItem[]

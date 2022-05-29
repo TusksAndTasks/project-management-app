@@ -36,7 +36,7 @@ function App() {
         <DndProvider backend={HTML5Backend}>
           <ErrorBoundary>
             <Routes>
-              <Route path="/" element={authToken ? <Main /> : <Welcome />} />
+              <Route path="/" element={authToken ? <Boards /> : <Welcome />} />
               <Route path="/Profile" element={authToken && <Profile />} />
               <Route path="/Boards" element={authToken && <Boards />} />
               <Route path="/Tasks" element={authToken && <Navigate to="/" />} />

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { List, Modal } from 'antd';
-import { FileImageOutlined, PlusCircleFilled, SnippetsOutlined } from '@ant-design/icons';
+import {
+  FileImageOutlined,
+  LoadingOutlined,
+  PlusCircleFilled,
+  SnippetsOutlined,
+} from '@ant-design/icons';
 import { useBoardsList } from '../../helpers/hooks/useBoardsList';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useLocales } from '../../helpers/hooks/useLocales';
@@ -53,79 +58,89 @@ export default function Boards() {
   }
 
   return (
-    <>
-      <button className="btn btn-create" type="button" onClick={() => showModal('new')}>
-        <PlusCircleFilled />
-        {locales[language].createButton}
-      </button>
-      <List
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          pageSize: 3,
-        }}
-        dataSource={boardsData.boards}
-        renderItem={(item) => (
-          <List.Item
-            key={item.id}
-            actions={[
-              <IconText icon={SnippetsOutlined} text="?" key="list-vertical-star-o" />,
-              <IconText icon={FileImageOutlined} text="2" key="list-vertical-message" />,
-            ]}
-            extra={
-              <>
-                <Link
-                  className="btn btn-primary"
-                  to="/Board"
-                  type="button"
-                  id={item.id}
-                  onClick={(e) => getBoardsData(e)}
-                >
-                  {locales[language].showBoard}
-                </Link>
-                <button
-                  className="btn btn-primary btn-delete"
-                  type="button"
-                  id={item.id}
-                  onClick={(e) => handleToDel(e)}
-                >
-                  {locales[language].deleteButton}
-                </button>
-              </>
-            }
-          >
-            <List.Item.Meta
-              title={
-                <Link to="/Board" id={item.id} onClick={(e) => getBoardsData(e)}>
-                  {item.title}
-                </Link>
-              }
-              description={item.description}
-            />
-            <Modal
-              title={isToDel ? locales[language].deleteTitle : locales[language].creatorTitle}
-              visible={isModalVisible}
-              onCancel={handleClose}
-              footer={[]}
-            >
-              {isToDel ? (
-                <ConformModal
-                  deleteItem={deleteBoard}
-                  authToken={authToken}
-                  handleOk={handleClose}
-                  itemToDel={{ id: currentItem.id, name: currentItem.title }}
+    <div>
+      <h1>{locales[language].title}</h1>
+      {boardsData.loading ? (
+        <>
+          <LoadingOutlined style={{ fontSize: '2em', color: '#8A4900', marginRight: '10px' }} />
+          {locales[language].loading}
+        </>
+      ) : (
+        <>
+          <button className="btn btn-create" type="button" onClick={() => showModal('new')}>
+            <PlusCircleFilled />
+            {locales[language].createButton}
+          </button>
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+              pageSize: 3,
+            }}
+            dataSource={boardsData.boards}
+            renderItem={(item) => (
+              <List.Item
+                key={item.id}
+                actions={[
+                  <IconText icon={SnippetsOutlined} text="?" key="list-vertical-star-o" />,
+                  <IconText icon={FileImageOutlined} text="2" key="list-vertical-message" />,
+                ]}
+                extra={
+                  <>
+                    <Link
+                      className="btn btn-primary"
+                      to="/Board"
+                      type="button"
+                      id={item.id}
+                      onClick={(e) => getBoardsData(e)}
+                    >
+                      {locales[language].showBoard}
+                    </Link>
+                    <button
+                      className="btn btn-primary btn-delete"
+                      type="button"
+                      id={item.id}
+                      onClick={(e) => handleToDel(e)}
+                    >
+                      {locales[language].deleteButton}
+                    </button>
+                  </>
+                }
+              >
+                <List.Item.Meta
+                  title={
+                    <Link to="/Board" id={item.id} onClick={(e) => getBoardsData(e)}>
+                      {item.title}
+                    </Link>
+                  }
+                  description={item.description}
                 />
-              ) : (
-                <BoardCreatorForm
-                  createBoard={createBoard}
-                  authToken={authToken}
-                  handleOk={handleClose}
-                />
-              )}
-            </Modal>
-          </List.Item>
-        )}
-      />
-    </>
+                <Modal
+                  title={isToDel ? locales[language].deleteTitle : locales[language].creatorTitle}
+                  visible={isModalVisible}
+                  onCancel={handleClose}
+                  footer={[]}
+                >
+                  {isToDel ? (
+                    <ConformModal
+                      deleteItem={deleteBoard}
+                      authToken={authToken}
+                      handleOk={handleClose}
+                      itemToDel={{ id: currentItem.id, name: currentItem.title }}
+                    />
+                  ) : (
+                    <BoardCreatorForm
+                      createBoard={createBoard}
+                      authToken={authToken}
+                      handleOk={handleClose}
+                    />
+                  )}
+                </Modal>
+              </List.Item>
+            )}
+          />
+        </>
+      )}
+    </div>
   );
 }

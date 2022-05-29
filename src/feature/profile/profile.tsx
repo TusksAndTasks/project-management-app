@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button, Form, Input, Typography } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { useUserData } from '../../helpers/hooks/useUserData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import './profile.scss';
@@ -21,7 +22,10 @@ export default function Profile() {
       <h1>{locales[language].title}</h1>
 
       {usersData.loading ? (
-        <div>Load..</div>
+        <>
+          <LoadingOutlined style={{ fontSize: '2em', color: '#8A4900', marginRight: '10px' }} />
+          {locales[language].loading}
+        </>
       ) : (
         <div>
           {usersData.users

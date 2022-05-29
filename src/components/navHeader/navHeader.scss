@@ -23,7 +23,7 @@ header {
             color: var(--color-primary);
 
             &:after {
-                border-color: var(--color-primary);
+                border-color: transparent;
             }
         }
     }
@@ -32,12 +32,12 @@ header {
         &.ant-menu-item {
             &.ant-menu-item-selected:after,
             &:hover:after, &:focus:after {
-                border-bottom: 2px solid var(--color-primary);
+                border-bottom: transparent;
             }
         }
         &.ant-menu-submenu {
             &:hover:after, &:focus:after {
-                border-bottom: 2px solid var(--color-primary);
+                border-bottom: transparent;
             }
         }
     }
