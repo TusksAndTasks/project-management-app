@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getHeaders } from '../../../helpers/helperFunctions/boardHelper';
+import { determineDirection } from '../../../helpers/helperFunctions/updateHelper';
 import { URLs } from '../../../helpers/requestURLs';
 import {
   ICreateTaskData,
@@ -146,18 +147,11 @@ const tasksSlice = createSlice({
     });
     builder.addCase(updateTask.fulfilled, (state, action) => {
       const { id, columnId, order } = action.payload;
-      let direction = 'new';
-      state.tasks[columnId].map((task) => {
-        if (task.id === id) {
-          direction = task.order > order ? 'up' : 'down';
-        }
-        return task;
-      });
+      const direction = determineDirection(order, id, state.tasks[columnId], 'task');
 
       if (direction === 'new') {
         state.tasks[columnId] = [...state.tasks[columnId], action.payload];
       }
-
       state.tasks[columnId] = state.tasks[columnId]
         .map((task) => {
           if (task.id === id) {
@@ -172,6 +166,7 @@ const tasksSlice = createSlice({
           return task;
         })
         .sort((a, b) => a.order - b.order);
+      state.loading = false;
     });
     builder.addCase(updateTask.rejected, (state, action) => {
       state.loading = false;
