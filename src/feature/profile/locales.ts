@@ -5,6 +5,7 @@ export const locales = {
     name: 'Имя',
     password: 'Пароль',
     button: 'Сохранить',
+    loading: 'Идёт загрузка данных профиля',
   },
   English: {
     title: 'Profile page',
@@ -12,5 +13,6 @@ export const locales = {
     name: 'Name',
     password: 'Password',
     button: 'Update',
+    loading: 'Profile data load ...',
   },
 };
