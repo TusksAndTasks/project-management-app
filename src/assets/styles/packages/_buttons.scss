@@ -38,6 +38,23 @@
   }
 }
 
+.btn-create-inverse {
+  border: 1px solid var(--color-green);
+  background-color: transparent;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  .anticon-plus-circle {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: var(--color-green);
+    span {
+      color: var(--color-secondary-lighter);
+    }
+  }
+}
+
 .btn:hover {
   cursor: pointer;
 }

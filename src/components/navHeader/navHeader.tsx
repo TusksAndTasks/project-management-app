@@ -36,7 +36,6 @@ export default function NavHeader() {
   const changeMode = (value: boolean) => {
     setLang(value ? LanguageEnum.ENG : LanguageEnum.RUS);
   };
-
   const itemsLeft = [
     getItem(
       <>

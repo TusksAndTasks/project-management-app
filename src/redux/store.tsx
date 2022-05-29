@@ -8,6 +8,7 @@ import { logInReducer } from './slices/logIn/logInSlice';
 import { signUpReducer } from './slices/signUp/signUpSlice';
 import { tasksReducers } from './slices/tasks/tasksSlice';
 import { usersReducers } from './slices/users/usersSlice';
+import { userReducers } from './slices/user/userSlice';
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     columns: columnReducers,
     tasks: tasksReducers,
     users: usersReducers,
+    user: userReducers,
   },
 });
 
