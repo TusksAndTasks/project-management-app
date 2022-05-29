@@ -12,4 +12,9 @@
     &_title:hover{
         background-color: lightgray;
     }
+
+    &__dragged{
+        opacity: 0.5;
+        background-color: crimson;
+    }
 }

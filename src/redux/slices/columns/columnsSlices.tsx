@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getHeaders } from '../../../helpers/helperFunctions/boardHelper';
+import { determineDirection } from '../../../helpers/helperFunctions/updateHelper';
 import { URLs } from '../../../helpers/requestURLs';
 import { IColumn } from '../board/boardTypes';
 import {
@@ -93,7 +94,7 @@ const columnsSlice = createSlice({
     });
     builder.addCase(getColumnsThunk.fulfilled, (state, action) => {
       state.loading = false;
-      state.columns = action.payload;
+      state.columns = action.payload.sort((a, b) => a.order - b.order);
       state.error = '';
     });
     builder.addCase(getColumnsThunk.rejected, (state, action) => {
@@ -128,13 +129,24 @@ const columnsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateColumnThunk.fulfilled, (state, action) => {
+      const { order, id } = action.payload;
+      const direction = determineDirection(order, id, state.columns, 'column');
+
+      state.columns = state.columns
+        .map((column) => {
+          if (column.id === id) {
+            return action.payload;
+          }
+          if (direction === 'up' && column.order >= order) {
+            column.order += 1;
+          }
+          if (direction === 'down' && column.order <= order) {
+            column.order -= 1;
+          }
+          return column;
+        })
+        .sort((a, b) => a.order - b.order);
       state.loading = false;
-      state.columns = state.columns.map((column) => {
-        if (column.id === action.payload.id) {
-          return action.payload;
-        }
-        return column;
-      });
       state.error = '';
     });
     builder.addCase(updateColumnThunk.rejected, (state, action) => {
