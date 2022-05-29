@@ -12,8 +12,6 @@ export const locales = {
     deleteTitle: 'Удалить пользователя',
     updateProfile: 'Данные пользователя обновляются ...',
     successUpdate: 'Профиль успешно обновлён',
-    loading: 'Идёт загрузка данных профиля',
-
   },
   English: {
     title: 'Profile page',
@@ -27,6 +25,5 @@ export const locales = {
     deleteTitle: 'Delete user',
     updateProfile: 'Profile data update ...',
     successUpdate: 'Profile updated successful',
-    loading: 'Profile data load ...',
   },
 };
