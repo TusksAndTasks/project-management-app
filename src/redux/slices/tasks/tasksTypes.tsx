@@ -57,10 +57,19 @@ export interface IUpdateTaskData {
   columnId: string;
   taskId: string;
   token: string;
+  newColumn?: string;
   body: {
     title: string;
     order: number;
     description: string;
     userId: string;
+  };
+}
+
+export interface IRemoveTaskData {
+  type: string;
+  payload: {
+    columnId: string;
+    taskId: string;
   };
 }

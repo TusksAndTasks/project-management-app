@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { IColumn } from '../../redux/slices/board/boardTypes';
@@ -40,8 +41,36 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
     setIsColumnDataChanging(false);
   }
 
+  const ref = useRef(null);
+
+  const [{ isDragging }, drag] = useDrag({
+    type: 'column',
+    item: { ...column },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+
+  const [, drop] = useDrop({
+    accept: 'column',
+    drop(item: IColumn) {
+      if (item.id === column.id) {
+        return;
+      }
+      updateColumn({
+        token: authToken,
+        boardId,
+        columnId: item.id,
+        title: item.title,
+        order: column.order,
+      });
+    },
+  });
+
+  drop(drag(ref));
+
   return (
-    <div key={column.id} className="column">
+    <div key={column.id} className={isDragging ? 'column__dragged' : 'column'} ref={ref}>
       {isColumDataChanging ? (
         <Input.Group compact>
           <Input
