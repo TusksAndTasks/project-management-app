@@ -9,6 +9,7 @@ export const locales = {
     showBoard: 'Открыть доску',
     deleteTitle: 'Удалить доску',
     deleteText: 'Вы действительно хотите удалить безвозвратно доску?',
+    loading: 'Идёт загрузка ...',
   },
   English: {
     title: 'Main page',
@@ -20,5 +21,6 @@ export const locales = {
     showBoard: 'Open board',
     deleteTitle: 'Delete board',
     deleteText: 'Are you sure to delete board?',
+    loading: 'Loading data ...',
   },
 };

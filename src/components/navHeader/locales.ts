@@ -9,6 +9,7 @@ export const locales = {
     signUpLink: 'Зарегестрироваться',
     signOut: 'Выйти',
     createBoard: 'Создать доску',
+    goHome: 'Перейти на главную',
   },
   English: {
     mainLink: 'Main',
@@ -20,5 +21,6 @@ export const locales = {
     signUpLink: 'Sign Up',
     signOut: 'Sign Out',
     createBoard: 'Create board',
+    goHome: 'Go to home',
   },
 };
