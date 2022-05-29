@@ -1,21 +1,9 @@
-export interface IUserData {
-  id: string;
-  name: string;
-  login: string;
-}
+import { IUserData } from '../user/userTypes';
 
-export interface IUserState {
+export interface IUsersState {
   users: IUserData[];
   error: string;
   loading: boolean;
-}
-
-export interface IUserUpdateState {
-  id: string;
-  name: string;
-  login: string;
-  password: string;
-  token: string;
 }
 
 export interface IUserDeleteState {

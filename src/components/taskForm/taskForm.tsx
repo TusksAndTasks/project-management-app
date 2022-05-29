@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd';
-import jwt_decode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { createTask } from '../../redux/slices/tasks/tasksSlice';

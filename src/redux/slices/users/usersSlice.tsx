@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { URLs } from '../../../helpers/requestURLs';
 import { getHeaders } from '../../../helpers/helperFunctions/boardHelper';
-import { IUserData, IUserDeleteState, IUserState, IUserUpdateState } from './usersTypes';
+import { IUserDeleteState, IUsersState } from './usersTypes';
+import { IUserData } from '../user/userTypes';
 
-const initialState: IUserState = {
+const initialState: IUsersState = {
   users: [] as IUserData[],
   error: '',
   loading: false,
@@ -24,23 +25,6 @@ const getUsers = createAsyncThunk<IUserData[], string, Record<never, string>>(
   }
 );
 
-const updateUser = createAsyncThunk<string, IUserUpdateState, Record<never, string>>(
-  'users/updateUser',
-  async (data) => {
-    const { id, token, name, login, password } = data;
-    const response = await fetch(URLs.users(id), {
-      method: 'PUT',
-      headers: getHeaders(token),
-      body: JSON.stringify({ name, login, password }),
-    });
-    if (response.ok) {
-      return response.json();
-    }
-    const err = await response.json();
-    throw new Error(err.message);
-  }
-);
-
 const deleteUser = createAsyncThunk<string, IUserDeleteState, Record<never, string>>(
   'users/deleteUser',
   async (data) => {
@@ -48,6 +32,7 @@ const deleteUser = createAsyncThunk<string, IUserDeleteState, Record<never, stri
     const response = await fetch(URLs.users(id), {
       method: 'DELETE',
       headers: getHeaders(token),
+      body: JSON.stringify({ id }),
     });
     if (response.ok) {
       return response.json();
@@ -74,8 +59,20 @@ const usersSlice = createSlice({
       state.loading = false;
       state.error = action.error.message as string;
     });
+    builder.addCase(deleteUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.users = state.users.filter((user) => user.id !== action.payload);
+      state.error = '';
+    });
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message as string;
+    });
   },
 });
 
 export const usersReducers = usersSlice.reducer;
-export { getUsers, updateUser, deleteUser };
+export { getUsers, deleteUser };
