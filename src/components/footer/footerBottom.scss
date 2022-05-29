@@ -1,0 +1,17 @@
+.ant-layout-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  > div,
+  > div a {
+    color: var(--color-secondary-lighter);
+  }
+
+  .ant-divider.ant-divider-vertical {
+    background: var(--color-secondary-lighter);
+  }
+
+  .anticon-github {
+    margin-right: 10px;
+  }
+}
