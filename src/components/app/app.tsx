@@ -4,7 +4,6 @@ import { Layout } from 'antd';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import NavHeader from '../navHeader/navHeader';
-import Main from '../../feature/main/main';
 import Profile from '../../feature/profile/profile';
 import LogIn from '../../feature/logIn/logIn';
 import SignUp from '../../feature/signUp/signUp';
