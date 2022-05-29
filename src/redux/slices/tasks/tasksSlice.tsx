@@ -7,6 +7,7 @@ import {
   IDeleteTaskData,
   IFullTask,
   IGetTasksData,
+  IRemoveTaskData,
   ITasksState,
   IUpdateTaskData,
 } from './tasksTypes';
@@ -70,11 +71,11 @@ const deleteTask = createAsyncThunk<IDeleteReturn, IDeleteTaskData, Record<never
 const updateTask = createAsyncThunk<IFullTask, IUpdateTaskData, Record<never, string>>(
   'tasks/updateTask',
   async (data) => {
-    const { boardId, columnId, taskId, token, body } = data;
+    const { boardId, columnId, taskId, token, body, newColumn } = data;
     const response = await fetch(URLs.tasks(boardId, columnId, taskId), {
       method: 'PUT',
       headers: getHeaders(token),
-      body: JSON.stringify({ boardId, columnId, ...body }),
+      body: JSON.stringify({ boardId, ...body, columnId: newColumn }),
     });
     if (response.ok) {
       return response.json();
@@ -87,7 +88,12 @@ const updateTask = createAsyncThunk<IFullTask, IUpdateTaskData, Record<never, st
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
-  reducers: {},
+  reducers: {
+    removeTask: (state, action: IRemoveTaskData) => {
+      const { columnId, taskId } = action.payload;
+      state.tasks[columnId] = state.tasks[columnId].filter((task) => task.id !== taskId);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getTasks.pending, (state) => {
       state.loading = true;
@@ -139,13 +145,33 @@ const tasksSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateTask.fulfilled, (state, action) => {
-      const { id, columnId } = action.payload;
-      state.tasks[columnId] = state.tasks[columnId].map((task) => {
+      const { id, columnId, order } = action.payload;
+      let direction = 'new';
+      state.tasks[columnId].map((task) => {
         if (task.id === id) {
-          return action.payload;
+          direction = task.order > order ? 'up' : 'down';
         }
         return task;
       });
+
+      if (direction === 'new') {
+        state.tasks[columnId] = [...state.tasks[columnId], action.payload];
+      }
+
+      state.tasks[columnId] = state.tasks[columnId]
+        .map((task) => {
+          if (task.id === id) {
+            return action.payload;
+          }
+          if ((direction === 'up' || direction === 'new') && task.order >= order) {
+            task.order += 1;
+          }
+          if (direction === 'down' && task.order <= order) {
+            task.order -= 1;
+          }
+          return task;
+        })
+        .sort((a, b) => a.order - b.order);
     });
     builder.addCase(updateTask.rejected, (state, action) => {
       state.loading = false;
@@ -155,4 +181,5 @@ const tasksSlice = createSlice({
 });
 
 export const tasksReducers = tasksSlice.reducer;
+export const { removeTask } = tasksSlice.actions;
 export { getTasks, createTask, deleteTask, updateTask };
