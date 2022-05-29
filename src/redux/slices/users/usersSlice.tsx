@@ -32,6 +32,7 @@ const deleteUser = createAsyncThunk<string, IUserDeleteState, Record<never, stri
     const response = await fetch(URLs.users(id), {
       method: 'DELETE',
       headers: getHeaders(token),
+      body: JSON.stringify({ id }),
     });
     if (response.ok) {
       return response.json();

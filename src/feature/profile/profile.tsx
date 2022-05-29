@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, Modal, Typography } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import jwt_decode from 'jwt-decode';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsersData } from '../../helpers/hooks/useUsersData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import './profile.scss';
@@ -15,13 +15,14 @@ import { useUserData } from '../../helpers/hooks/useUserData';
 import { IUserUpdateState } from '../../redux/slices/user/userTypes';
 
 export default function Profile() {
-  const [authToken] = useAuthToken();
+  const [authToken, getUserToken] = useAuthToken();
   const [, , deleteCurrentUser] = useUsersData();
   const [userData, getCurrentUser, updateCurrentUser] = useUserData();
   const [language] = useLocales();
   const decodedToken = (jwt_decode(authToken) as IJtwToken).userId;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
+  const navigate = useNavigate();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -37,6 +38,12 @@ export default function Profile() {
         setIsUpdated(false);
       }, 3000);
     }
+  };
+
+  const handleOkDelete = async () => {
+    document.cookie = `${encodeURIComponent('login')}=${encodeURIComponent('')}`;
+    getUserToken();
+    navigate('/');
   };
 
   useEffect(() => {
@@ -147,7 +154,7 @@ export default function Profile() {
               <ConformModal
                 deleteItem={deleteCurrentUser}
                 authToken={authToken}
-                handleOk={handleClose}
+                handleOk={handleOkDelete}
                 itemToDel={{ id: userData.user.id, name: userData.user.name }}
               />
             </Modal>
