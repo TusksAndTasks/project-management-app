@@ -150,7 +150,9 @@ const tasksSlice = createSlice({
       const direction = determineDirection(order, id, state.tasks[columnId], 'task');
 
       if (direction === 'new') {
-        state.tasks[columnId] = [...state.tasks[columnId], action.payload];
+        state.tasks[columnId] = state.tasks[columnId]
+          ? [...state.tasks[columnId], action.payload]
+          : [action.payload];
       }
       state.tasks[columnId] = state.tasks[columnId]
         .map((task) => {

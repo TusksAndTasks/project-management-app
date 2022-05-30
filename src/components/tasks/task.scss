@@ -3,6 +3,28 @@
 
     &__dragged{
     opacity: 0.5;
-    background-color: crimson;
     }
+}
+
+.task-wrap{
+    display: flex;
+    flex-flow: column;
+    justify-content: end;
+      
+    &__dragged{
+        opacity: 0.5;
+        margin-top: 20px;
+        }
+    
+    
+    &__default{
+        min-height: 100px;
+        flex-grow: 1;
+        }
+        
+    &__over{
+        flex-grow: 2;
+        opacity: 0.5;
+        background-color: gray;
+        }
 }
