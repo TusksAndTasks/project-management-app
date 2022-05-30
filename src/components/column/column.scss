@@ -12,6 +12,7 @@
 
     &_title:hover{
         background-color: lightgray;
+        cursor: pointer;
     }
 
     &__dragged{
@@ -28,8 +29,13 @@
         max-height: 500px;
         &::-webkit-scrollbar { width: 0 !important }
         display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        &-nodata{
+            padding-top: 5px;
+            text-align: center;
+          }
     }
 
     &_create-btn{
@@ -38,6 +44,7 @@
         text-align: start;
         &:hover{
           background-color: lightgray;
+          cursor: pointer;
         }
     }
 
@@ -48,11 +55,12 @@
         &:hover{
           background-color: lightgray;
           color: #8A4900;
+          cursor: pointer;
         }
     }
 
     &_edit{
-        margin: 0 7px;
+        padding: 0 7px;
 
         &-btn{
           margin: 0 3px;
@@ -63,9 +71,11 @@
           color: white;
           &:hover{
               background-color: lightgray;
+              cursor: pointer;
           }
         }
 
+        &-btn,
         &-close{
           margin: 0 3px;
           height: 32px;
@@ -77,6 +87,14 @@
           &:hover{
               background-color: lightgray;
               color: #8A4900;
+              cursor: pointer;
+            }
+          }
+          &-btn {
+            background-color: var(--color-green);
+            &:hover{
+              background-color: lightgray;
+              color: var(--color-green);
           }
         }
     }

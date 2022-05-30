@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { Button, Input, Modal, notification } from 'antd';
+import { Input, Modal, notification } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
-import { CloseOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import jwt_decode from 'jwt-decode';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
@@ -109,14 +109,14 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
       {isColumDataChanging ? (
         <Input.Group compact className="column_edit">
           <Input
-            style={{ width: '40%' }}
+            style={{ width: '70%' }}
             defaultValue={column.title}
             onChange={(e) => setColumnTitle(e.target.value)}
             className="column_edit-input"
           />
-          <Button className="column_edit-btn" type="primary" onClick={() => updateColumnTitle()}>
-            {locales[language].updateColumn}
-          </Button>
+          <button className="column_edit-btn" type="button" onClick={() => updateColumnTitle()}>
+            <CheckOutlined />
+          </button>
           <button
             className="column_edit-close"
             type="button"
@@ -135,9 +135,11 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
         </button>
       )}
       <div className="column_task-wrapper">
-        {tasks[column.id] && tasks[column.id].length > 0
-          ? tasks[column.id].map((task) => <Task key={task.id} task={task} ids={ids} />)
-          : locales[language].noTasksFound}
+        {tasks[column.id] && tasks[column.id].length > 0 ? (
+          tasks[column.id].map((task) => <Task key={task.id} task={task} ids={ids} />)
+        ) : (
+          <div className="column_task-wrapper-nodata">{locales[language].noTasksFound}</div>
+        )}
         <DragTaskWrapper
           taskData={{
             ...taskData,

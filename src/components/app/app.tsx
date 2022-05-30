@@ -57,7 +57,7 @@ function App() {
       <Header style={isStickyHeader ? styleSticky : { position: 'static', background: '#fff' }}>
         <NavHeader />
       </Header>
-      <Content>
+      <Content style={isStickyHeader ? { minHeight: '100%' } : { minHeight: '80vh' }}>
         <DndProvider backend={HTML5Backend}>
           <ErrorBoundary>
             <Routes>
