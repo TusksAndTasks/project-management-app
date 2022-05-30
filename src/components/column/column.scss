@@ -3,6 +3,7 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
+    overflow-y: scroll;
 
     &_title{
         border: none;

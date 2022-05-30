@@ -12,6 +12,7 @@ import { taskHelp } from '../../helpers/helperFunctions/taskHelper';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { locales } from './locales';
 import { IState } from '../../redux/store';
+import DragTaskWrapper from '../dragTaskWrapper/dragTaskWrapper';
 
 export default function Column({ column, boardId }: { column: IColumn; boardId: string }) {
   const [, , , deleteColumn, updateColumn] = useColumnList();
@@ -67,6 +68,13 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
     },
   });
 
+  const taskData = {
+    id: '',
+    columnId: column.id,
+    token: authToken,
+    boardId,
+  };
+
   drop(drag(ref));
 
   return (
@@ -94,6 +102,13 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
       {tasks[column.id] && tasks[column.id].length > 0
         ? tasks[column.id].map((task) => <Task key={task.id} task={task} ids={ids} />)
         : locales[language].noTasksFound}
+      <DragTaskWrapper
+        taskData={{
+          ...taskData,
+          order: tasks[column.id] && tasks[column.id].length > 0 ? tasks[column.id].length + 1 : 1,
+        }}
+        isDragging={isDragging}
+      />
       <button type="button" onClick={showModal}>
         {locales[language].createTask}
       </button>
