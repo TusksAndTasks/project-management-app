@@ -16,7 +16,10 @@
 
     &__dragged{
         opacity: 0.5;
-        background-color: crimson;
+    }
+
+    &__over{
+        background-color: gray;
     }
 
     &_task-wrapper{

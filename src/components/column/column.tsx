@@ -72,7 +72,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
     }),
   });
 
-  const [, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop({
     accept: 'column',
     drop(item: IColumn) {
       if (item.id === column.id) {
@@ -86,6 +86,9 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
         order: column.order,
       });
     },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
   });
 
   const taskData = {
@@ -98,7 +101,11 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   drop(drag(ref));
 
   return (
-    <div key={column.id} className={isDragging ? 'column__dragged' : 'column'} ref={ref}>
+    <div
+      key={column.id}
+      className={`column ${isDragging ? 'column__dragged' : ''} ${isOver ? 'column__over' : ''}`}
+      ref={ref}
+    >
       {isColumDataChanging ? (
         <Input.Group compact className="column_edit">
           <Input
