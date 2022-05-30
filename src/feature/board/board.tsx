@@ -20,11 +20,14 @@ export function Board() {
   const [authToken] = useAuthToken();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch() as AppDispatch;
+  const [taskLoad, setTaskLoad] = useState(false);
   useEffect(() => {
     if (boardId) {
+      setTaskLoad(true);
       columnsData.columns.forEach((column) => {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
       });
+      setTimeout(() => setTaskLoad(false), 1000);
     }
   }, [columnsData.columns]);
 
@@ -57,7 +60,7 @@ export function Board() {
     <Column key={column.id} column={column} boardId={boardId} />
   ));
 
-  return columnsData.loading ? (
+  return columnsData.loading && taskLoad ? (
     <div>{locales[language].loading}</div>
   ) : (
     <div>
