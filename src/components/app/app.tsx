@@ -27,10 +27,8 @@ function App() {
 
   const setStickyHeader = () => {
     if (window.scrollY > 90) {
-      console.log('Set stickY true');
       setIsStickyHeader(true);
     } else {
-      console.log('Set stickY false');
       setIsStickyHeader(false);
     }
   };
@@ -43,10 +41,8 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('Set stickY');
     window.document.addEventListener('scroll', setStickyHeader);
     return () => {
-      console.log('remove stickY');
       window.document.removeEventListener('scroll', setStickyHeader);
     };
   }, []);
