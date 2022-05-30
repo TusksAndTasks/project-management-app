@@ -99,7 +99,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
       {isColumDataChanging ? (
         <Input.Group compact className="column_edit">
           <Input
-            style={{ width: 'auto' }}
+            style={{ width: '70%' }}
             defaultValue={column.title}
             onChange={(e) => setColumnTitle(e.target.value)}
             className="column_edit-input"
