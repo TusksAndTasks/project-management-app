@@ -16,6 +16,11 @@ export default function DragTaskWrapper(props: IDragTask) {
       if (item.id === id) {
         return;
       }
+
+      if (!children && item.id === id + 1) {
+        return;
+      }
+
       const data = {
         body: {
           description: item.description,
