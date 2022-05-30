@@ -117,7 +117,7 @@ export default function Task({ task, ids }: ITaskProps) {
     <DragTaskWrapper taskData={taskData} isDragging={isDragging}>
       <div className="task" ref={drag}>
         <div className="task_title-wrapper">
-          <div>{locales[language].title + task.title}</div>
+          <div>{task.title}</div>
           <button type="button" className="task_show-btn" onClick={showModal}>
             <EditOutlined />
           </button>

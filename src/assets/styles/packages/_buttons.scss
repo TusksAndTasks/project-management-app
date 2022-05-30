@@ -1,4 +1,6 @@
-.btn.btn-primary {
+.btn.btn-primary,
+.ant-btn-primary,
+.ant-btn-default {
   border: 1px solid var(--color-primary);
   padding: 5px;
   color: var(--color-primary);
@@ -10,6 +12,13 @@
       color: var(--color-secondary-lighter);
     }
   }
+}
+
+.ant-btn.ant-btn-primary {
+  margin-left: 20px;
+}
+.ant-btn.ant-btn-default {
+  margin-top: 20px;
 }
 
 .btn.btn-delete {

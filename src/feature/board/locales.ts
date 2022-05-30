@@ -9,7 +9,8 @@ export const locales = {
     modal: 'Укажите название колонки',
     modalTitle: 'Название :',
     titleRequired: 'Укажите название',
-    loading: 'Загрузка',
+    loading: 'Идёт загрузка борды',
+    dataError: 'У Вас ещё нет колонок. Создайте свою первую колонку',
   },
   English: {
     boardTitle: 'Board title',
@@ -21,6 +22,7 @@ export const locales = {
     modal: 'Give column a title',
     modalTitle: 'Title :',
     titleRequired: 'Write column title',
-    loading: 'Loading',
+    loading: 'Loading board',
+    dataError: 'You dont have any column. Create your first column.',
   },
 };

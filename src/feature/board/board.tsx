@@ -1,7 +1,8 @@
 import { Button, Form, Input, Modal, notification } from 'antd';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { PlusOutlined } from '@ant-design/icons';
+import { useLocation } from 'react-router-dom';
+import { FolderAddOutlined, LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { useLocales } from '../../helpers/hooks/useLocales';
@@ -13,23 +14,35 @@ import './board.scss';
 import { useBoardData } from '../../helpers/hooks/useBoardData';
 
 export function Board() {
-  const [boardsData] = useBoardData();
-  const boardId = boardsData.currentBoard.id;
-  const [columnsData, , createNewColumn] = useColumnList();
+  const [boardsData, getBoard] = useBoardData();
+  const [columnsData, getColumnsList, createNewColumn] = useColumnList();
   const [language] = useLocales();
   const [authToken] = useAuthToken();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch() as AppDispatch;
   const [taskLoad, setTaskLoad] = useState(false);
+  const location = useLocation();
+  const boardId: string = location.pathname.split('/').pop() || '';
+  const [isOnLoad, setIsOnLoad] = useState(true);
   useEffect(() => {
-    if (boardId) {
+    getBoard({ id: boardId, token: authToken });
+    if (boardsData.currentBoard.id) {
       setTaskLoad(true);
+      if (columnsData.columns.length < 1) {
+        setTimeout(() => {
+          setIsOnLoad(false);
+        }, 1000);
+      }
       columnsData.columns.forEach((column) => {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
       });
       setTimeout(() => setTaskLoad(false), 1000);
     }
   }, [columnsData.columns]);
+
+  useEffect(() => {
+    getColumnsList({ boardId, token: authToken });
+  }, []);
 
   useEffect(() => {
     if (columnsData.error && !columnsData.loading) {
@@ -60,14 +73,28 @@ export function Board() {
     <Column key={column.id} column={column} boardId={boardId} />
   ));
 
+  const dataLoad = (
+    <>
+      <LoadingOutlined style={{ fontSize: '2em', color: '#8A4900', marginRight: '10px' }} />
+      {locales[language].loading}
+    </>
+  );
+
+  const dataError = (
+    <>
+      <FolderAddOutlined />
+      {locales[language].dataError}
+    </>
+  );
+
   return columnsData.loading && taskLoad ? (
-    <div>{locales[language].loading}</div>
+    <div>{isOnLoad ? dataLoad : dataError}</div>
   ) : (
     <div>
       <div className="board_header">
         <div className="board_info">
-          <h3>{`${locales[language].boardTitle}:${boardsData.currentBoard.title}`}</h3>
-          <p>{`${locales[language].boardDescription}:${boardsData.currentBoard.description}`}</p>
+          <h3>{`${locales[language].boardTitle}: ${boardsData.currentBoard.title}`}</h3>
+          <p>{`${locales[language].boardDescription}: ${boardsData.currentBoard.description}`}</p>
         </div>
         <button type="button" className="board_create-btn" onClick={showModal}>
           <PlusOutlined />
@@ -75,7 +102,7 @@ export function Board() {
         </button>
       </div>
       <div className="fullBoard">
-        {columns}
+        <div>{isOnLoad ? columns : dataError}</div>
         <Modal
           title={locales[language].modal}
           visible={isModalVisible}

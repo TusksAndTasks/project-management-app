@@ -69,7 +69,7 @@ function App() {
               <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
               <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
               <Route path="/demo" element={<DesignComponents />} />
-              <Route path="/Board" element={authToken && <Board />} />
+              <Route path="/Board/:BoardId" element={authToken && <Board />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </ErrorBoundary>

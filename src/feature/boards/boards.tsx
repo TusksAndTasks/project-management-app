@@ -92,16 +92,15 @@ export default function Boards() {
                 key={item.id}
                 actions={[
                   <IconText icon={SnippetsOutlined} text="?" key="list-vertical-star-o" />,
-                  <IconText icon={FileImageOutlined} text="2" key="list-vertical-message" />,
+                  <IconText icon={FileImageOutlined} text="-" key="list-vertical-message" />,
                 ]}
                 extra={
                   <>
                     <Link
                       className="btn btn-primary"
-                      to="/Board"
+                      to={`/Board/${item.id}`}
                       type="button"
                       id={item.id}
-                      onClick={(e) => getBoardsData(e)}
                     >
                       {locales[language].showBoard}
                     </Link>
@@ -118,7 +117,7 @@ export default function Boards() {
               >
                 <List.Item.Meta
                   title={
-                    <Link to="/Board" id={item.id} onClick={(e) => getBoardsData(e)}>
+                    <Link to={`/Board/${item.id}`} id={item.id} onClick={(e) => getBoardsData(e)}>
                       {item.title}
                     </Link>
                   }
