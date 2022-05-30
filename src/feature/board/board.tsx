@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, Modal, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
@@ -20,13 +20,25 @@ export function Board() {
   const [authToken] = useAuthToken();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch() as AppDispatch;
+  const [taskLoad, setTaskLoad] = useState(false);
   useEffect(() => {
     if (boardId) {
+      setTaskLoad(true);
       columnsData.columns.forEach((column) => {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
       });
+      setTimeout(() => setTaskLoad(false), 1000);
     }
   }, [columnsData.columns]);
+
+  useEffect(() => {
+    if (columnsData.error && !columnsData.loading) {
+      notification.open({
+        message: 'Error!',
+        description: columnsData.error,
+      });
+    }
+  }, [columnsData.error, columnsData.loading]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -48,7 +60,7 @@ export function Board() {
     <Column key={column.id} column={column} boardId={boardId} />
   ));
 
-  return columnsData.loading ? (
+  return columnsData.loading && taskLoad ? (
     <div>{locales[language].loading}</div>
   ) : (
     <div>

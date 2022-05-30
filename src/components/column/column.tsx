@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { Button, Input, Modal } from 'antd';
-import { useRef, useState } from 'react';
+import { Button, Input, Modal, notification } from 'antd';
+import { useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
@@ -20,7 +20,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   const [, , , deleteColumn, updateColumn] = useColumnList();
   const [authToken] = useAuthToken();
   const [language] = useLocales();
-  const { tasks } = useSelector((state: IState) => state.tasks);
+  const { tasks, error, loading } = useSelector((state: IState) => state.tasks);
   const ids = { boardId, columnId: column.id };
   const getLists = taskHelp();
   const { nameList, ruleList } = getLists(language);
@@ -49,6 +49,15 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
     setIsToDel(true);
     showModal();
   }
+
+  useEffect(() => {
+    if (error && !loading) {
+      notification.open({
+        message: 'Error!',
+        description: error,
+      });
+    }
+  }, [error, loading]);
 
   const ref = useRef(null);
 
