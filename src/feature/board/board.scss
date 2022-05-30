@@ -3,3 +3,22 @@
     flex-flow: row nowrap;
     justify-content: space-between;
 }
+
+.board{
+    &_header{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    &_create-btn{
+        background-color: #808A91;
+        border: none;
+        color: #EFF0F2;
+        height: 48px;
+        &:hover{
+            background-color: #F0E9E2;
+            color: #808A91;
+        }
+    }
+}

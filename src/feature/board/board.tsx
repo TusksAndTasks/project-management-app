@@ -1,6 +1,7 @@
 import { Button, Form, Input, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { useLocales } from '../../helpers/hooks/useLocales';
@@ -51,13 +52,18 @@ export function Board() {
     <div>{locales[language].loading}</div>
   ) : (
     <div>
-      <div>{`${locales[language].boardTitle}:${boardsData.currentBoard.title}`}</div>
-      <div>{`${locales[language].boardDescription}:${boardsData.currentBoard.description}`}</div>
-      <div className="fullBoard">
-        {columns}
-        <button type="button" onClick={showModal}>
+      <div className="board_header">
+        <div className="board_info">
+          <h3>{`${locales[language].boardTitle}:${boardsData.currentBoard.title}`}</h3>
+          <p>{`${locales[language].boardDescription}:${boardsData.currentBoard.description}`}</p>
+        </div>
+        <button type="button" className="board_create-btn" onClick={showModal}>
+          <PlusOutlined />
           {locales[language].createButton}
         </button>
+      </div>
+      <div className="fullBoard">
+        {columns}
         <Modal
           title={locales[language].modal}
           visible={isModalVisible}

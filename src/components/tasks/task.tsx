@@ -67,11 +67,17 @@ export default function Task({ task, ids }: ITaskProps) {
   return (
     <DragTaskWrapper taskData={taskData} isDragging={isDragging}>
       <div className="task" ref={drag}>
-        <div>{locales[language].title + task.title}</div>
-        <button type="button" onClick={showModal}>
-          {locales[language].showButton}
-        </button>
-        <button type="button" onClick={() => dispatch(deleteTask(pathTaskData))}>
+        <div className="task_title-wrapper">
+          <div>{locales[language].title + task.title}</div>
+          <button type="button" className="task_show-btn" onClick={showModal}>
+            <EditOutlined />
+          </button>
+        </div>
+        <button
+          type="button"
+          className="task_delete-btn"
+          onClick={() => dispatch(deleteTask(pathTaskData))}
+        >
           {locales[language].delete}
         </button>
         <Modal

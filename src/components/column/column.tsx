@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { IColumn } from '../../redux/slices/board/boardTypes';
@@ -99,21 +100,26 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
           {`${column.title}`}
         </button>
       )}
-      {tasks[column.id] && tasks[column.id].length > 0
-        ? tasks[column.id].map((task) => <Task key={task.id} task={task} ids={ids} />)
-        : locales[language].noTasksFound}
-      <DragTaskWrapper
-        taskData={{
-          ...taskData,
-          order: tasks[column.id] && tasks[column.id].length > 0 ? tasks[column.id].length + 1 : 1,
-        }}
-        isDragging={isDragging}
-      />
-      <button type="button" onClick={showModal}>
+      <div className="column_task-wrapper">
+        {tasks[column.id] && tasks[column.id].length > 0
+          ? tasks[column.id].map((task) => <Task key={task.id} task={task} ids={ids} />)
+          : locales[language].noTasksFound}
+        <DragTaskWrapper
+          taskData={{
+            ...taskData,
+            order:
+              tasks[column.id] && tasks[column.id].length > 0 ? tasks[column.id].length + 1 : 1,
+          }}
+          isDragging={isDragging}
+        />
+      </div>
+      <button type="button" className="column_create-btn" onClick={showModal}>
+        <PlusOutlined />
         {locales[language].createTask}
       </button>
       <button
         type="button"
+        className="column_delete-btn"
         onClick={() => {
           deleteColumn({ token: authToken, boardId, columnId: column.id });
         }}
