@@ -47,4 +47,34 @@
           color: #8A4900;
         }
     }
+
+    &_edit{
+        margin: 0 7px;
+
+        &-btn{
+          margin: 0 3px;
+          width: 40%;
+          font-size: 14px;
+          background-color: #808A91;
+          border: none;
+          color: white;
+          &:hover{
+              background-color: lightgray;
+          }
+        }
+
+        &-close{
+          margin: 0 5px;
+          width: 10%;
+          padding: 4px 0 0 0;
+          margin-top: 2px;
+          border: none;
+          background-color: #8A4900;
+          color: white;
+          &:hover{
+              background-color: lightgray;
+              color: #8A4900;
+          }
+        }
+    }
 }
