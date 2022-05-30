@@ -126,7 +126,8 @@ export default function Boards() {
                       deleteItem={deleteBoard}
                       authToken={authToken}
                       handleOk={handleClose}
-                      itemToDel={{ id: currentItem.id, name: currentItem.title }}
+                      itemToDel={{ id: currentItem.id }}
+                      name={currentItem.title}
                     />
                   ) : (
                     <BoardCreatorForm

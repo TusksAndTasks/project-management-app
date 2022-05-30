@@ -14,6 +14,7 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { locales } from './locales';
 import { IState } from '../../redux/store';
 import DragTaskWrapper from '../dragTaskWrapper/dragTaskWrapper';
+import ConformModal from '../conformModal/conformModal';
 
 export default function Column({ column, boardId }: { column: IColumn; boardId: string }) {
   const [, , , deleteColumn, updateColumn] = useColumnList();
@@ -24,11 +25,13 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   const getLists = taskHelp();
   const { nameList, ruleList } = getLists(language);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isToDel, setIsToDel] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleClose = () => {
     setIsModalVisible(false);
+    setIsToDel(false);
   };
   const [isColumDataChanging, setIsColumnDataChanging] = useState(false);
   const [newColumnTitle, setColumnTitle] = useState(column.title);
@@ -41,6 +44,10 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
       order: column.order,
     });
     setIsColumnDataChanging(false);
+  }
+  function handleDelete() {
+    setIsToDel(true);
+    showModal();
   }
 
   const ref = useRef(null);
@@ -125,13 +132,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
         <PlusOutlined />
         {locales[language].createTask}
       </button>
-      <button
-        type="button"
-        className="column_delete-btn"
-        onClick={() => {
-          deleteColumn({ token: authToken, boardId, columnId: column.id });
-        }}
-      >
+      <button type="button" className="column_delete-btn" onClick={handleDelete}>
         {locales[language].deleteColumn}
       </button>
       <Modal
@@ -140,13 +141,23 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
         onCancel={handleClose}
         footer={[]}
       >
-        <TaskForm
-          nameList={nameList}
-          ruleList={ruleList}
-          boardId={boardId}
-          columnId={column.id}
-          handleClose={handleClose}
-        />
+        {isToDel ? (
+          <ConformModal
+            deleteItem={deleteColumn}
+            authToken={authToken}
+            handleOk={handleClose}
+            itemToDel={{ boardId, columnId: column.id }}
+            name={column.title}
+          />
+        ) : (
+          <TaskForm
+            nameList={nameList}
+            ruleList={ruleList}
+            boardId={boardId}
+            columnId={column.id}
+            handleClose={handleClose}
+          />
+        )}
       </Modal>
     </div>
   );

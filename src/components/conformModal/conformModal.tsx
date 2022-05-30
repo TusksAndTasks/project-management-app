@@ -1,8 +1,7 @@
-import React from 'react';
 import { Button } from 'antd';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { locales } from './locales';
-import { IConformModalProps } from './conformModalTypes';
+import { ComplexDeleteData, IConformModalProps } from './conformModalTypes';
 import './conformModal.scss';
 
 export default function ConformModal({
@@ -10,11 +9,13 @@ export default function ConformModal({
   authToken,
   handleOk,
   itemToDel,
+  name,
 }: IConformModalProps) {
   const [language] = useLocales();
 
   const deleteElement = () => {
-    deleteItem({ id: itemToDel.id, token: authToken });
+    const deleteData = { ...itemToDel, token: authToken } as ComplexDeleteData;
+    deleteItem(deleteData);
     handleOk();
   };
 
@@ -22,7 +23,7 @@ export default function ConformModal({
     <>
       <div className="conform-modal">
         <h3>{locales[language].text}</h3>
-        <span>{itemToDel.name}</span>
+        <span>{name}</span>
       </div>
       <Button
         type="primary"
