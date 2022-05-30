@@ -8,7 +8,6 @@ import {
   LogoutOutlined,
   PlusCircleFilled,
   SettingOutlined,
-  TeamOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
 import React, { useState } from 'react';
@@ -52,14 +51,6 @@ export default function NavHeader() {
       </>,
       'main',
       <HomeOutlined />
-    ),
-    getItem(
-      <>
-        {locales[language].people}
-        <Link to="/Team" />
-      </>,
-      'people',
-      <TeamOutlined />
     ),
   ];
   const itemsRightAuth = [
