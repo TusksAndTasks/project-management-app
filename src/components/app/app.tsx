@@ -17,6 +17,7 @@ import { Board } from '../../feature/board/board';
 import ErrorBoundary from '../errorBoundary/errorBoundary';
 import Boards from '../../feature/boards/boards';
 import FooterBottom from '../footer/footerBottom';
+import Team from '../team/team';
 
 const { Header, Content, Footer } = Layout;
 
@@ -64,7 +65,7 @@ function App() {
               <Route path="/Profile" element={authToken && <Profile />} />
               <Route path="/Boards" element={authToken && <Boards />} />
               <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
-              <Route path="/People" element={authToken && <Navigate to="/" />} />
+              <Route path="/Team" element={<Team />} />
               <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
               <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
               <Route path="/demo" element={<DesignComponents />} />
