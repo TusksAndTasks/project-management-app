@@ -62,7 +62,7 @@ function App() {
           <ErrorBoundary>
             <Routes>
               <Route path="/" element={authToken ? <Boards /> : <Welcome />} />
-              <Route path="/Profile" element={authToken && <Profile />} />
+              <Route path="/Profile" element={authToken ? <Profile /> : <LogIn />} />
               <Route path="/Boards" element={authToken && <Boards />} />
               <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
               <Route path="/Team" element={authToken ? <Team /> : <LogIn />} />
