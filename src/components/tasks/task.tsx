@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, FullscreenOutlined } from '@ant-design/icons';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
@@ -119,7 +119,7 @@ export default function Task({ task, ids }: ITaskProps) {
         <div className="task_title-wrapper">
           <div>{task.title}</div>
           <button type="button" className="task_show-btn" onClick={showModal}>
-            <EditOutlined />
+            <FullscreenOutlined />
           </button>
         </div>
         <button type="button" className="task_delete-btn" onClick={handleDelete}>
