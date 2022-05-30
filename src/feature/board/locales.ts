@@ -1,0 +1,28 @@
+export const locales = {
+  Russian: {
+    boardTitle: 'Название доски',
+    boardDescription: 'Описание доски',
+    title: 'Название колонки',
+    description: 'Описание колонки',
+    deleteButton: 'Удалить колонку',
+    createButton: 'Создать колонку',
+    modal: 'Укажите название колонки',
+    modalTitle: 'Название :',
+    titleRequired: 'Укажите название',
+    loading: 'Идёт загрузка борды',
+    dataError: 'У Вас ещё нет колонок. Создайте свою первую колонку',
+  },
+  English: {
+    boardTitle: 'Board title',
+    boardDescription: 'Board description',
+    title: 'Column title',
+    description: 'Column description',
+    deleteButton: 'Delete column',
+    createButton: 'Create column',
+    modal: 'Give column a title',
+    modalTitle: 'Title :',
+    titleRequired: 'Write column title',
+    loading: 'Loading board',
+    dataError: 'You dont have any column. Create your first column.',
+  },
+};

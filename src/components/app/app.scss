@@ -1,0 +1,33 @@
+#root {
+    .app-wrapper{
+        height: 100%;
+    }
+
+    .ant-layout-header {
+        background: #fff;
+    }
+
+    .ant-layout-content {
+        padding: 50px;
+        min-height: 100%;
+
+        
+        > div {
+            height: inherit;
+            padding-bottom: 100px;
+        }
+
+        > div.board_dashboard {
+            height: 100%;
+            padding-bottom: 0;
+        }
+    }
+
+    .ant-layout-footer {
+        background: #2A4B64;
+        color: #fff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+}

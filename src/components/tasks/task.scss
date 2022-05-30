@@ -1,0 +1,65 @@
+.task {
+    background-color: #B8BAB9;
+    width: 90%;
+    margin-left: 5%;
+    height: 85px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    
+    &__dragged{
+    opacity: 0.5;
+    }
+
+    &_show-btn{
+     background-color: transparent;
+     border: none;
+     &:hover{
+         background-color: lightgray;
+     }
+    }
+
+    &_delete-btn{
+        background-color: #8A4E22;
+        color: white;
+        border: none;
+         &:hover{
+          background-color: lightgray;
+          color: #8A4900;
+        }
+    }
+
+    &_title-wrapper{
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+    }
+
+    &_user{
+        margin-top: 10px;
+    }
+}
+
+.task-wrap{
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+    margin-top: 10px;
+      
+    &__dragged{
+        opacity: 0.5;
+        margin-top: 20px;
+        }
+    
+    
+    &__default{
+        min-height: 100px;
+        flex-grow: 1;
+        }
+        
+    &__over{
+        flex-grow: 2;
+        opacity: 0.5;
+        background-color: gray;
+        }
+}

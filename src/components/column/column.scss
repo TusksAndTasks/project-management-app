@@ -1,0 +1,101 @@
+.column{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    background-color: #f0e9e2;
+    min-width: 252px;
+
+    &_title{
+        border: none;
+        background-color: #d4cfc9;
+    }
+
+    &_title:hover{
+        background-color: lightgray;
+        cursor: pointer;
+    }
+
+    &__dragged{
+        opacity: 0.5;
+    }
+
+    &__over{
+        background-color: gray;
+    }
+
+    &_task-wrapper{
+        overflow-y: scroll;
+        min-height: 500px;
+        max-height: 500px;
+        &::-webkit-scrollbar { width: 0 !important }
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        &-nodata{
+            padding-top: 5px;
+            text-align: center;
+          }
+    }
+
+    &_create-btn{
+        background-color: #f0e9e2;
+        border: none;
+        text-align: start;
+        &:hover{
+          background-color: lightgray;
+          cursor: pointer;
+        }
+    }
+
+    &_delete-btn{
+        background-color: #8A4900;
+        border: none;
+        color: white;
+        &:hover{
+          background-color: lightgray;
+          color: #8A4900;
+          cursor: pointer;
+        }
+    }
+
+    &_edit{
+        padding: 0 7px;
+
+        &-btn{
+          margin: 0 3px;
+          width: 40%;
+          font-size: 14px;
+          background-color: #808A91;
+          border: none;
+          color: white;
+          &:hover{
+              background-color: lightgray;
+              cursor: pointer;
+          }
+        }
+
+        &-btn,
+        &-close{
+          margin: 0 3px;
+          height: 32px;
+          width: 12%;
+          padding: 4px 0 0 0;
+          border: none;
+          background-color: #8A4900;
+          color: white;
+          &:hover{
+              background-color: lightgray;
+              color: #8A4900;
+              cursor: pointer;
+            }
+          }
+          &-btn {
+            background-color: var(--color-green);
+            &:hover{
+              background-color: lightgray;
+              color: var(--color-green);
+          }
+        }
+    }
+}

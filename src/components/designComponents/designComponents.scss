@@ -1,0 +1,23 @@
+.demo-container {
+  margin-top: 2rem;
+  margin-left: 2rem;
+
+  > div {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  > div:not(:last-child) {
+    border-bottom: 1px solid #1890ff;
+  }
+
+  .ant-btn-primary {
+    margin-left: 8px;
+  }
+
+  .demo-icons .anticon {
+    font-size: 2em;
+    color: #1890ff;
+    padding: 0.5em;
+  }
+}
