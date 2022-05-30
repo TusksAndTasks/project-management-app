@@ -27,7 +27,9 @@ export default function Welcome() {
   return (
     <Row>
       <Col flex={3}>
-        <div>{locales[language].title}</div>
+        <h1 className="title">{locales[language].title}</h1>
+        <h3 className="title">{locales[language].text}</h3>
+        <div className="title">{locales[language].decription}</div>
         <List
           grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2 }}
           dataSource={profileDev}

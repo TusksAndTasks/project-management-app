@@ -1,6 +1,7 @@
 html, body {
   font-family: Roboto, sans-serif;
   font-size: 65%;
+  background: var(--background-main);
 }
 
 #root {
@@ -8,6 +9,11 @@ html, body {
 
   > div {
     height: inherit;
+  }
+
+  h4 a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
   }
 }
 
