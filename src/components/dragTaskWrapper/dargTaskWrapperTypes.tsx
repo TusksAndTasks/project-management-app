@@ -10,4 +10,5 @@ export interface IDragTask {
   };
   isDragging: boolean;
   children?: ReactNode;
+  decodedToken: string;
 }

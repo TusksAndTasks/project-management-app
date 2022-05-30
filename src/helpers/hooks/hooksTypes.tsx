@@ -27,14 +27,11 @@ export type IUseColumnsReturn = [
   (data: IUpdateColumnData) => void
 ];
 
-export type IUseUsersReturn = [
-  IUsersState,
-  (token: string) => void,
-  (data: IUserDeleteState) => void
-];
+export type IUseUsersReturn = [IUsersState, (token: string) => void];
 
 export type IUseUserReturn = [
   IUserState,
   (data: IUserShowState) => void,
-  (data: IUserUpdateState) => void
+  (data: IUserUpdateState) => void,
+  (data: IUserDeleteState) => void
 ];

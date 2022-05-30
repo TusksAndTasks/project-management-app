@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { IUseUsersReturn } from './hooksTypes';
 import { AppDispatch, IState } from '../../redux/store';
-import { deleteUser, getUsers } from '../../redux/slices/users/usersSlice';
-import { IUserDeleteState } from '../../redux/slices/users/usersTypes';
+import { getUsers } from '../../redux/slices/users/usersSlice';
 
 export function useUsersData(): IUseUsersReturn {
   const dispatch = useDispatch() as AppDispatch;
@@ -13,13 +12,9 @@ export function useUsersData(): IUseUsersReturn {
     dispatch(getUsers(token));
   };
 
-  const deleteCurrentUser = (data: IUserDeleteState) => {
-    dispatch(deleteUser(data));
-  };
-
   /*  const getCurrentUser = (data: IUserShowState) => {
     dispatch(getUser(data));
   }; */
 
-  return [usersData, getUsersList, deleteCurrentUser];
+  return [usersData, getUsersList];
 }

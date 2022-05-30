@@ -65,7 +65,7 @@ function App() {
               <Route path="/Profile" element={authToken && <Profile />} />
               <Route path="/Boards" element={authToken && <Boards />} />
               <Route path="/Tasks" element={authToken && <Navigate to="/" />} />
-              <Route path="/Team" element={<Team />} />
+              <Route path="/Team" element={authToken ? <Team /> : <LogIn />} />
               <Route path="/LogIn" element={authToken ? <Navigate to="/" /> : <LogIn />} />
               <Route path="/SignUp" element={authToken ? <Navigate to="/" /> : <SignUp />} />
               <Route path="/demo" element={<DesignComponents />} />

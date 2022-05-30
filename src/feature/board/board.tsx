@@ -12,6 +12,7 @@ import Column from '../../components/column/column';
 import { locales } from './locales';
 import './board.scss';
 import { useBoardData } from '../../helpers/hooks/useBoardData';
+import { useUsersData } from '../../helpers/hooks/useUsersData';
 
 export function Board() {
   const [boardsData, getBoard] = useBoardData();
@@ -24,6 +25,8 @@ export function Board() {
   const location = useLocation();
   const boardId: string = location.pathname.split('/').pop() || '';
   const [isOnLoad, setIsOnLoad] = useState(true);
+  const [, getUsersList] = useUsersData();
+
   useEffect(() => {
     getBoard({ id: boardId, token: authToken });
     if (boardsData.currentBoard.id) {
@@ -42,6 +45,7 @@ export function Board() {
 
   useEffect(() => {
     getColumnsList({ boardId, token: authToken });
+    getUsersList(authToken);
   }, []);
 
   useEffect(() => {

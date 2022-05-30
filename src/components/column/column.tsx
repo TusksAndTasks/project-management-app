@@ -3,6 +3,7 @@ import { Button, Input, Modal, notification } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { CloseOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import jwt_decode from 'jwt-decode';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { IColumn } from '../../redux/slices/board/boardTypes';
@@ -15,10 +16,12 @@ import { locales } from './locales';
 import { IState } from '../../redux/store';
 import DragTaskWrapper from '../dragTaskWrapper/dragTaskWrapper';
 import ConformModal from '../conformModal/conformModal';
+import { IJtwToken } from '../taskForm/taskFormTypes';
 
 export default function Column({ column, boardId }: { column: IColumn; boardId: string }) {
   const [, , , deleteColumn, updateColumn] = useColumnList();
   const [authToken] = useAuthToken();
+  const decodedToken = (jwt_decode(authToken) as IJtwToken).userId;
   const [language] = useLocales();
   const { tasks, error, loading } = useSelector((state: IState) => state.tasks);
   const ids = { boardId, columnId: column.id };
@@ -135,6 +138,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
               tasks[column.id] && tasks[column.id].length > 0 ? tasks[column.id].length + 1 : 1,
           }}
           isDragging={isDragging}
+          decodedToken={decodedToken}
         />
       </div>
       <button type="button" className="column_create-btn" onClick={showModal}>
