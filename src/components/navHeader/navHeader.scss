@@ -1,5 +1,4 @@
 header {
-    position: fixed;
     width: 100%;
     display: flex;
     flex-flow: row;
@@ -61,6 +60,7 @@ header {
 
     .ant-menu-horizontal.ant-menu-light {
         border: none;
+        background: transparent;
     }
 
     .ant-btn.ant-btn-default.btn-create {
@@ -81,7 +81,7 @@ header {
 }
 
 .ant-layout-header {
-    background: #fff;
+    //background: #fff;
 }
 
 .ant-input-group-wrapper {

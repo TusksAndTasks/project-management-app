@@ -12,7 +12,7 @@
     }
 
     &_show-btn{
-     background-color: #F5F5F8;
+     background-color: transparent;
      border: none;
      &:hover{
          background-color: lightgray;
@@ -39,7 +39,8 @@
 .task-wrap{
     display: flex;
     flex-flow: column;
-    justify-content: end;
+    justify-content: flex-end;
+    margin-top: 10px;
       
     &__dragged{
         opacity: 0.5;

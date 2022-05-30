@@ -9,7 +9,9 @@ export function determineDirection(
   hint: string
 ) {
   let direction = hint === 'task' ? 'new' : '';
-  if (!objects){return 'new'}
+  if (!objects) {
+    return 'new';
+  }
   objects.map((obj) => {
     if (obj.id === id) {
       direction = obj.order > order ? 'up' : 'down';

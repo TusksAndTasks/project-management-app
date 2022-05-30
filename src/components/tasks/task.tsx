@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
-import { EditOutlined } from '@ant-design/icons';
-import { useDrag } from 'react-dnd';
+import { EditOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
@@ -55,7 +55,7 @@ export default function Task({ task, ids }: ITaskProps) {
   const [{ isDragging }, drag] = useDrag({
     type: 'task',
     item: { ...task },
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
@@ -117,9 +117,9 @@ export default function Task({ task, ids }: ITaskProps) {
     <DragTaskWrapper taskData={taskData} isDragging={isDragging}>
       <div className="task" ref={drag}>
         <div className="task_title-wrapper">
-          <div>{locales[language].title + task.title}</div>
+          <div>{task.title}</div>
           <button type="button" className="task_show-btn" onClick={showModal}>
-            <EditOutlined />
+            <FullscreenOutlined />
           </button>
         </div>
         <button type="button" className="task_delete-btn" onClick={handleDelete}>

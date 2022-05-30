@@ -18,7 +18,7 @@ import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { BoardCreatorForm } from '../boardCreatorForm.tsx/boardCreatorForm';
 import { useBoardsList } from '../../helpers/hooks/useBoardsList';
-import logo from '../../assets/img/logo-kanban.png';
+import logo from '../../assets/img/logo-kanban.svg';
 import getItem from './menuItems/menuItems';
 
 export default function NavHeader() {

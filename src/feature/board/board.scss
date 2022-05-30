@@ -1,8 +1,11 @@
 .fullBoard{
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
     overflow-x: scroll;
+
+    .column {
+        margin-right: 50px;
+    }
 }
 
 .board{
