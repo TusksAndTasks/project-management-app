@@ -6,7 +6,7 @@ import { AppDispatch } from '../../redux/store';
 import { IDragTask } from './dargTaskWrapperTypes';
 
 export default function DragTaskWrapper(props: IDragTask) {
-  const { taskData, isDragging, children } = props;
+  const { taskData, isDragging, children, decodedToken } = props;
   const { id, columnId, order, token, boardId } = taskData;
   const dispatch = useDispatch() as AppDispatch;
 
@@ -21,7 +21,7 @@ export default function DragTaskWrapper(props: IDragTask) {
           description: item.description,
           title: item.title,
           order,
-          userId: item.userId,
+          userId: decodedToken,
         },
         token,
         boardId,

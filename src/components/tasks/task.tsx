@@ -1,8 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
-import { EditOutlined, FullscreenOutlined } from '@ant-design/icons';
+import { EditOutlined, FullscreenOutlined, UserOutlined } from '@ant-design/icons';
 import { DragSourceMonitor, useDrag } from 'react-dnd';
+import jwt_decode from 'jwt-decode';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
@@ -13,14 +14,21 @@ import { ITaskProps } from './taskTypes';
 import DragTaskWrapper from '../dragTaskWrapper/dragTaskWrapper';
 import ConformModal from '../conformModal/conformModal';
 import { IDeleteTaskData } from '../../redux/slices/tasks/tasksTypes';
+import { useUsersData } from '../../helpers/hooks/useUsersData';
+import { IJtwToken } from '../taskForm/taskFormTypes';
+import { getUserNames } from '../../helpers/helperFunctions/userNamesHelper';
 
 export default function Task({ task, ids }: ITaskProps) {
   const [language] = useLocales();
   const dispatch = useDispatch() as AppDispatch;
   const [authToken] = useAuthToken();
+  const decodedToken = (jwt_decode(authToken) as IJtwToken).userId;
   const { boardId, columnId } = ids;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isToDel, setIsToDel] = useState(false);
+  const [usersData] = useUsersData();
+  const taskUserName = getUserNames(task.userId, usersData);
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -46,7 +54,7 @@ export default function Task({ task, ids }: ITaskProps) {
     const body = {
       ...updateTaskData,
       order: task.order,
-      userId: task.userId,
+      userId: decodedToken,
     };
     dispatch(updateTask({ ...pathTaskData, body }));
     setIsTaskUpdates(false);
@@ -99,6 +107,11 @@ export default function Task({ task, ids }: ITaskProps) {
           {locales[language].changeData}
           <EditOutlined />
         </Button>
+        <div className="task_user">
+          {locales[language].updateUser}
+          <UserOutlined />
+          {taskUserName || locales[language].deletedUser}
+        </div>
       </>
     );
   }
@@ -114,7 +127,7 @@ export default function Task({ task, ids }: ITaskProps) {
   };
 
   return (
-    <DragTaskWrapper taskData={taskData} isDragging={isDragging}>
+    <DragTaskWrapper taskData={taskData} isDragging={isDragging} decodedToken={decodedToken}>
       <div className="task" ref={drag}>
         <div className="task_title-wrapper">
           <div>{task.title}</div>

@@ -9,6 +9,8 @@ export const locales = {
     modalTitle: 'Текущая задача',
     update: 'Обновить',
     showButton: 'Показать задачу',
+    updateUser: 'Последние изменения сделаны:',
+    deletedUser: 'Удаленным пользователем',
   },
   English: {
     title: 'Title: ',
@@ -20,5 +22,7 @@ export const locales = {
     modalTitle: 'Current task',
     update: 'Update',
     showButton: 'Show task',
+    updateUser: 'Latest changes by:',
+    deletedUser: 'Deleted user',
   },
 };

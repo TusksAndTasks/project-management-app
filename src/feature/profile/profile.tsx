@@ -3,7 +3,6 @@ import { Button, Form, Input, Modal, Typography } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import jwt_decode from 'jwt-decode';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUsersData } from '../../helpers/hooks/useUsersData';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import './profile.scss';
 import { locales } from './locales';
@@ -16,8 +15,7 @@ import { IUserUpdateState } from '../../redux/slices/user/userTypes';
 
 export default function Profile() {
   const [authToken, getUserToken] = useAuthToken();
-  const [, , deleteCurrentUser] = useUsersData();
-  const [userData, getCurrentUser, updateCurrentUser] = useUserData();
+  const [userData, getCurrentUser, updateCurrentUser, deleteCurrentUser] = useUserData();
   const [language] = useLocales();
   const decodedToken = (jwt_decode(authToken) as IJtwToken).userId;
   const [isModalVisible, setIsModalVisible] = useState(false);
