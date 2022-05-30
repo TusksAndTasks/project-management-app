@@ -155,7 +155,8 @@ export default function Profile() {
                 deleteItem={deleteCurrentUser}
                 authToken={authToken}
                 handleOk={handleOkDelete}
-                itemToDel={{ id: userData.user.id, name: userData.user.name }}
+                itemToDel={{ id: userData.user.id }}
+                name={userData.user.name}
               />
             </Modal>
           </Form>

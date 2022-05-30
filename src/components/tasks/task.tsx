@@ -11,6 +11,8 @@ import { AppDispatch } from '../../redux/store';
 import './task.scss';
 import { ITaskProps } from './taskTypes';
 import DragTaskWrapper from '../dragTaskWrapper/dragTaskWrapper';
+import ConformModal from '../conformModal/conformModal';
+import { IDeleteTaskData } from '../../redux/slices/tasks/tasksTypes';
 
 export default function Task({ task, ids }: ITaskProps) {
   const [language] = useLocales();
@@ -18,11 +20,13 @@ export default function Task({ task, ids }: ITaskProps) {
   const [authToken] = useAuthToken();
   const { boardId, columnId } = ids;
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isToDel, setIsToDel] = useState(false);
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleClose = () => {
     setIsModalVisible(false);
+    setIsToDel(false);
   };
   const [isTaskUpdates, setIsTaskUpdates] = useState(false);
   const [updateTaskData, setUpdateTaskData] = useState({
@@ -64,6 +68,51 @@ export default function Task({ task, ids }: ITaskProps) {
     boardId,
   };
 
+  function modalReturn(check: boolean) {
+    return check ? (
+      <Input.Group compact>
+        <Input
+          style={{ width: 'calc(100% - 200px)' }}
+          value={updateTaskData.title}
+          onChange={(e) => {
+            const inputValue = e.target.value;
+            return setUpdateTaskData((state) => ({ ...state, title: inputValue }));
+          }}
+        />
+        <Input
+          style={{ width: 'calc(100% - 200px)' }}
+          value={updateTaskData.description}
+          onChange={(e) => {
+            const inputValue = e.target.value;
+            return setUpdateTaskData((state) => ({ ...state, description: inputValue }));
+          }}
+        />
+        <Button type="primary" onClick={() => changeTaskData()}>
+          {locales[language].update}
+        </Button>
+      </Input.Group>
+    ) : (
+      <>
+        <div>{locales[language].title + task.title}</div>
+        <div>{locales[language].description + task.description}</div>
+        <Button onClick={() => setIsTaskUpdates(true)}>
+          {locales[language].changeData}
+          <EditOutlined />
+        </Button>
+      </>
+    );
+  }
+  const taskModal = modalReturn(isTaskUpdates);
+
+  function handleDelete() {
+    setIsToDel(true);
+    showModal();
+  }
+
+  const deleteTaskProp = (props: IDeleteTaskData) => {
+    dispatch(deleteTask(props));
+  };
+
   return (
     <DragTaskWrapper taskData={taskData} isDragging={isDragging}>
       <div className="task" ref={drag}>
@@ -73,11 +122,7 @@ export default function Task({ task, ids }: ITaskProps) {
             <EditOutlined />
           </button>
         </div>
-        <button
-          type="button"
-          className="task_delete-btn"
-          onClick={() => dispatch(deleteTask(pathTaskData))}
-        >
+        <button type="button" className="task_delete-btn" onClick={handleDelete}>
           {locales[language].delete}
         </button>
         <Modal
@@ -86,37 +131,16 @@ export default function Task({ task, ids }: ITaskProps) {
           onCancel={handleClose}
           footer={[]}
         >
-          {isTaskUpdates ? (
-            <Input.Group compact>
-              <Input
-                style={{ width: 'calc(100% - 200px)' }}
-                value={updateTaskData.title}
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  return setUpdateTaskData((state) => ({ ...state, title: inputValue }));
-                }}
-              />
-              <Input
-                style={{ width: 'calc(100% - 200px)' }}
-                value={updateTaskData.description}
-                onChange={(e) => {
-                  const inputValue = e.target.value;
-                  return setUpdateTaskData((state) => ({ ...state, description: inputValue }));
-                }}
-              />
-              <Button type="primary" onClick={() => changeTaskData()}>
-                {locales[language].update}
-              </Button>
-            </Input.Group>
+          {isToDel ? (
+            <ConformModal
+              deleteItem={deleteTaskProp}
+              authToken={authToken}
+              handleOk={handleClose}
+              itemToDel={{ boardId, columnId, taskId: task.id, newColumn: columnId }}
+              name={task.title}
+            />
           ) : (
-            <>
-              <div>{locales[language].title + task.title}</div>
-              <div>{locales[language].description + task.description}</div>
-              <Button onClick={() => setIsTaskUpdates(true)}>
-                {locales[language].changeData}
-                <EditOutlined />
-              </Button>
-            </>
+            taskModal
           )}
         </Modal>
       </div>
