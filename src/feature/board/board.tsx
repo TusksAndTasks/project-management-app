@@ -29,9 +29,9 @@ export function Board() {
     if (boardsData.currentBoard.id) {
       setTaskLoad(true);
       if (columnsData.columns.length < 1) {
-        setTimeout(() => {
-          setIsOnLoad(false);
-        }, 1000);
+        setIsOnLoad(false);
+      } else {
+        setIsOnLoad(true);
       }
       columnsData.columns.forEach((column) => {
         dispatch(getTasks({ token: authToken, boardId, columnId: column.id }));
@@ -102,7 +102,7 @@ export function Board() {
         </button>
       </div>
       <div className="fullBoard">
-        <div>{isOnLoad ? columns : dataError}</div>
+        {isOnLoad ? columns : dataError}
         <Modal
           title={locales[language].modal}
           visible={isModalVisible}
