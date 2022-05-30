@@ -25,40 +25,50 @@ export default function Welcome() {
   ];
 
   return (
-    <Row>
-      <Col flex={3}>
-        <h1 className="title">{locales[language].title}</h1>
-        <h3 className="title">{locales[language].text}</h3>
-        <div className="title">{locales[language].decription}</div>
-        <List
-          grid={{ gutter: 16, xs: 1, sm: 1, md: 2, lg: 2, xl: 2 }}
-          dataSource={profileDev}
-          renderItem={(profile) => (
-            <List.Item>
-              <Card title={profile.name}>
-                <Avatar src={profile.img} />
-                <a href={profile.gitHub}>{profile.name}</a>
-              </Card>
-            </List.Item>
-          )}
-        />
-        <Card className="card-none-profile" onClick={() => navigate('/SignUp')}>
-          <Avatar className="none-avatar" icon={<UserOutlined />} />
-          <div className="none-profile-text">
-            <PlusCircleFilled />
-            <span>{locales[language].joinUs}</span>
-          </div>
-        </Card>
-      </Col>
-      <Col flex={2}>
-        <Image
-          width={500}
-          className="frontpage-image"
-          src={frontPageImage}
-          alt="frontPageImage"
-          preview={false}
-        />
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <Col xs={{ span: 12, offset: 1 }} lg={{ span: 12, offset: 2 }}>
+          <h1 className="title">{locales[language].title}</h1>
+          <h3 className="text">{locales[language].text}</h3>
+          <div className="decrription">{locales[language].decription}</div>
+        </Col>
+        <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          <Image
+            width={500}
+            className="frontpage-image"
+            src={frontPageImage}
+            alt="frontPageImage"
+            preview={false}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col
+          xs={{ span: 12, offset: 2 }}
+          lg={{ span: 12, offset: 2 }}
+          style={{ marginTop: '-100px' }}
+        >
+          <List
+            grid={{ gutter: 16, xs: 1, sm: 1, md: 1, lg: 2, xl: 3 }}
+            dataSource={profileDev}
+            renderItem={(profile) => (
+              <List.Item>
+                <Card title={profile.name}>
+                  <Avatar src={profile.img} />
+                  <a href={profile.gitHub}>{profile.name}</a>
+                </Card>
+              </List.Item>
+            )}
+          />
+          <Card className="card-none-profile" onClick={() => navigate('/SignUp')}>
+            <Avatar className="none-avatar" icon={<UserOutlined />} />
+            <div className="none-profile-text">
+              <PlusCircleFilled />
+              <span>{locales[language].joinUs}</span>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 }
