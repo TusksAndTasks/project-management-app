@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { List, Modal } from 'antd';
+import { List, Modal, notification } from 'antd';
 import {
   FileImageOutlined,
   LoadingOutlined,
@@ -51,6 +51,15 @@ export default function Boards() {
   useEffect(() => {
     getBoardsList(authToken);
   }, []);
+
+  useEffect(() => {
+    if (boardsData.error && !boardsData.loading) {
+      notification.open({
+        message: 'Error!',
+        description: boardsData.error,
+      });
+    }
+  }, [boardsData.error, boardsData.loading]);
 
   function getBoardsData(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
     showBoard({ id: (e.target as HTMLElement).id, token: authToken });

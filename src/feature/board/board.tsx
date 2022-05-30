@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, Modal, notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
@@ -27,6 +27,15 @@ export function Board() {
       });
     }
   }, [columnsData.columns]);
+
+  useEffect(() => {
+    if (columnsData.error && !columnsData.loading) {
+      notification.open({
+        message: 'Error!',
+        description: columnsData.error,
+      });
+    }
+  }, [columnsData.error, columnsData.loading]);
 
   const showModal = () => {
     setIsModalVisible(true);
