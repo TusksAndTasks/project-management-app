@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { PlusOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
 import { IColumn } from '../../redux/slices/board/boardTypes';
@@ -81,15 +81,23 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   return (
     <div key={column.id} className={isDragging ? 'column__dragged' : 'column'} ref={ref}>
       {isColumDataChanging ? (
-        <Input.Group compact>
+        <Input.Group compact className="column_edit">
           <Input
-            style={{ width: 'calc(100% - 200px)' }}
+            style={{ width: '40%' }}
             defaultValue={column.title}
             onChange={(e) => setColumnTitle(e.target.value)}
+            className="column_edit-input"
           />
-          <Button type="primary" onClick={() => updateColumnTitle()}>
+          <Button className="column_edit-btn" type="primary" onClick={() => updateColumnTitle()}>
             {locales[language].updateColumn}
           </Button>
+          <button
+            className="column_edit-close"
+            type="button"
+            onClick={() => setIsColumnDataChanging(false)}
+          >
+            <CloseOutlined className="test" />
+          </button>
         </Input.Group>
       ) : (
         <button
