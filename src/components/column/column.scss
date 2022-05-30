@@ -1,13 +1,13 @@
 .column{
-    border: 2px solid green;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    overflow-y: scroll;
+    background-color: #f0e9e2;
+    width: 252px;
 
     &_title{
         border: none;
-        background-color: none;
+        background-color: #d4cfc9;
     }
 
     &_title:hover{
@@ -17,5 +17,34 @@
     &__dragged{
         opacity: 0.5;
         background-color: crimson;
+    }
+
+    &_task-wrapper{
+        overflow-y: scroll;
+        min-height: 500px;
+        max-height: 500px;
+        &::-webkit-scrollbar { width: 0 !important }
+        display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    }
+
+    &_create-btn{
+        background-color: #f0e9e2;
+        border: none;
+        text-align: start;
+        &:hover{
+          background-color: lightgray;
+        }
+    }
+
+    &_delete-btn{
+        background-color: #8A4900;
+        border: none;
+        color: white;
+        &:hover{
+          background-color: lightgray;
+          color: #8A4900;
+        }
     }
 }
