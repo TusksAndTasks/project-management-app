@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Button, Input, Modal, notification } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
 import { useColumnList } from '../../helpers/hooks/useColumnList';
@@ -64,7 +64,7 @@ export default function Column({ column, boardId }: { column: IColumn; boardId: 
   const [{ isDragging }, drag] = useDrag({
     type: 'column',
     item: { ...column },
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });

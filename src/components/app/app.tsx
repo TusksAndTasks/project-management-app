@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { Layout } from 'antd';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -23,6 +23,33 @@ const { Header, Content, Footer } = Layout;
 function App() {
   const [logInState] = useLogInData();
   const [authToken, getUserToken] = useAuthToken();
+  const [isStickyHeader, setIsStickyHeader] = useState<boolean>(false);
+
+  const setStickyHeader = () => {
+    if (window.scrollY > 90) {
+      console.log('Set stickY true');
+      setIsStickyHeader(true);
+    } else {
+      console.log('Set stickY false');
+      setIsStickyHeader(false);
+    }
+  };
+
+  const styleSticky: CSSProperties = {
+    position: 'sticky',
+    background: '#E2D5C6',
+    top: 0,
+    boxShadow: '0 2px 4px 0 rgb(0 0 0 / 20%)',
+  };
+
+  useEffect(() => {
+    console.log('Set stickY');
+    window.document.addEventListener('scroll', setStickyHeader);
+    return () => {
+      console.log('remove stickY');
+      window.document.removeEventListener('scroll', setStickyHeader);
+    };
+  }, []);
 
   useEffect(() => {
     getUserToken();
@@ -30,7 +57,7 @@ function App() {
 
   return (
     <Layout className="app-wrapper">
-      <Header>
+      <Header style={isStickyHeader ? styleSticky : { position: 'static', background: '#fff' }}>
         <NavHeader />
       </Header>
       <Content>

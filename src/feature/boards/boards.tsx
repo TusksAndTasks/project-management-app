@@ -84,7 +84,7 @@ export default function Boards() {
             itemLayout="vertical"
             size="large"
             pagination={{
-              pageSize: 3,
+              pageSize: 6,
             }}
             dataSource={boardsData.boards}
             renderItem={(item) => (

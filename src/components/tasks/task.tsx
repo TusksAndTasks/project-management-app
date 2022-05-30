@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Button, Input, Modal } from 'antd';
 import { useState } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { useDrag } from 'react-dnd';
+import { DragSourceMonitor, useDrag } from 'react-dnd';
 import { locales } from './locales';
 import { useLocales } from '../../helpers/hooks/useLocales';
 import { useAuthToken } from '../../helpers/hooks/useAuthToken';
@@ -55,7 +55,7 @@ export default function Task({ task, ids }: ITaskProps) {
   const [{ isDragging }, drag] = useDrag({
     type: 'task',
     item: { ...task },
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
